@@ -1,4 +1,4 @@
-package bbc.news.jenny;
+package bbc.news.jenny.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,9 +18,6 @@ public class ResourceController {
 
     private static final String template = "Hello, %s!";
 
-    public void initList(){
-        thePets.add(new Pet("Angus"));
-    }
 
     //these are all gets
     @RequestMapping("/hello")
@@ -28,9 +25,9 @@ public class ResourceController {
         return "hello";
     }
 
-    @RequestMapping("/hello/{name}")
-    public String returnStringFromURL2(@PathVariable String name){
-        return "hello " + name;
+    @RequestMapping("/hello/{forename},{surname}")
+    public String returnStringFromURL2(@PathVariable String forename, @PathVariable String surname){
+        return "hello" + forename + surname;
     }
 
     @RequestMapping("pets")
@@ -41,7 +38,7 @@ public class ResourceController {
     @RequestMapping("pets/{name}")
     public Pet returnPetByName(@PathVariable String name){
         for(Pet pet : thePets){
-            if (pet.name.equals(name)){
+            if (pet.getName().equals(name)){
                 return pet;
             }
 
@@ -49,9 +46,10 @@ public class ResourceController {
         return null;
     }
 
-    @RequestMapping(value = "pets/new/{name}", method = RequestMethod.GET)
-    public Pet makeNewPet(@PathVariable String name){
-        thePets.add(new Pet(name));
+    @RequestMapping(value = "pets/new/{ownerId},{name},{age},{hunger},{petTypeId}", method = RequestMethod.GET)
+    public Pet makeNewPet(@PathVariable int ownerId, @PathVariable String name, @PathVariable int age,
+                          @PathVariable int hunger, @PathVariable int petTypeId){
+        thePets.add(new Cat(-10,ownerId,name,age,hunger,petTypeId,5));
 
         return thePets.get(thePets.size()-1);
     }
@@ -61,7 +59,7 @@ public class ResourceController {
     //***POST
     @RequestMapping(value="/test",method = RequestMethod.POST)
     public String displayPetFromBody(@RequestBody Pet pet){
-        return pet.name;
+        return pet.getName();
     }
 
     @RequestMapping(value="/text",method = RequestMethod.POST)
