@@ -1,11 +1,11 @@
 package bbc.news.jenny.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.web.bind.annotation.*;
+import repository.OwnerRepository;
+import repository.PetRepository;
 import workflow.PetFeederBeef;
 import workflow.PetFeederHam;
 
@@ -13,71 +13,75 @@ import workflow.PetFeederHam;
 public class ResourceController {
 
 
-    //make some pets
-    private List<Pet> thePets = new ArrayList<Pet>();
+    private PetRepository petRepository = new PetRepository();
+    private OwnerRepository ownerRepository = new OwnerRepository();
 
-
-
-    private static final String template = "Hello, %s!";
+    //Load from database
+    private List<Pet> listOfPets = petRepository.load();
+    private List<Owner> listOfOwners = ownerRepository.load();
 
 
     //these are all gets
     @RequestMapping("/hello")
-    public String returnStringFromURL(){
+    public String returnStringFromURL() {
         return "hello";
     }
 
     @RequestMapping("/hello/{forename}/{surname}")
-    public String returnStringFromURL2(@PathVariable String forename, @PathVariable String surname){
+    public String returnStringFromURL2(@PathVariable String forename, @PathVariable String surname) {
         return "hello" + forename + surname;
     }
 
     @RequestMapping("pets")
-    public List<Pet> returnListOfPets(){
-        return thePets;
+    public List<Pet> returnListOfPets() {
+        return listOfPets;
     }
 
-    @RequestMapping("pets/{name}")
-    public Pet returnPetByName(@PathVariable String name){
-        for(Pet pet : thePets){
-            if (pet.getName().equals(name)){
-                return pet;
-            }
+    //TODO make Mr. Pompadoor work with this:
 
-        }
-        return null;
+    @RequestMapping("pets/{name}")
+    public Pet returnPetByName(@PathVariable String name) {
+        return findPetFromListByName(listOfPets,name);
     }
 
     @RequestMapping(value = "pets/new/{ownerId}/{name}/{age}/{hunger}/{petTypeId}", method = RequestMethod.GET)
     public Pet makeNewPet(@PathVariable int ownerId, @PathVariable String name, @PathVariable int age,
-                          @PathVariable int hunger, @PathVariable int petTypeId){
+                          @PathVariable int hunger, @PathVariable int petTypeId) {
 
-        switch (petTypeId){
-            case 1: thePets.add(new GuineaPig(0,ownerId,name,age,hunger,petTypeId));
+        switch (petTypeId) {
+            case 1:
+                listOfPets.add(new GuineaPig(0, ownerId, name, age, hunger, petTypeId));
                 break;
-            case 2: thePets.add(new Cat(0,ownerId,name,age,hunger,petTypeId,5));
+            case 2:
+                listOfPets.add(new Cat(0, ownerId, name, age, hunger, petTypeId, 5));
                 break;
-            case 3: thePets.add(new Pig(0,ownerId,name,age,hunger,petTypeId));
+            case 3:
+                listOfPets.add(new Pig(0, ownerId, name, age, hunger, petTypeId));
                 break;
-            case 4: thePets.add(new Dog(0,ownerId,name,age,hunger,petTypeId,true));
+            case 4:
+                listOfPets.add(new Dog(0, ownerId, name, age, hunger, petTypeId, true));
                 break;
         }
 
-        return thePets.get(thePets.size()-1);
+        return listOfPets.get(listOfPets.size() - 1);
     }
+
     @RequestMapping("pets/{name}/feed/{amount}/{foodType}")
-    public String feedPet(@PathVariable String name, @PathVariable int amount, @PathVariable String foodType){
+    public String feedPet(@PathVariable String name, @PathVariable int amount, @PathVariable String foodType) {
         String output;
-        switch (foodType){
+        switch (foodType) {
             case "beef":
             case "Beef":
                 PetFeederBeef petFeederBeef = new PetFeederBeef();
-                output = petFeederBeef.feed(thePets.get(0),amount);
+
+
+                //TODO fix this too
+                output = petFeederBeef.feed(findPetFromListByName(listOfPets,name), amount);
                 break;
             case "ham":
             case "Ham":
                 PetFeederHam petFeederHam = new PetFeederHam();
-                output = petFeederHam.feed(thePets.get(0),amount);
+                output = petFeederHam.feed(findPetFromListByName(listOfPets,name), amount);
                 break;
             default:
                 output = "";
@@ -87,22 +91,25 @@ public class ResourceController {
     }
 
 
-
     //***POST
-    @RequestMapping(value="/test",method = RequestMethod.POST)
-    public String displayPetFromBody(@RequestBody Pet pet){
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    public String displayPetFromBody(@RequestBody Pet pet) {
         return pet.getName();
     }
 
-    @RequestMapping(value="/text",method = RequestMethod.POST)
-    public String displayTextFromBody(@RequestBody String cheese){
+    @RequestMapping(value = "/text", method = RequestMethod.POST)
+    public String displayTextFromBody(@RequestBody String cheese) {
         return cheese;
     }
 
-
-
-
-
+    private Pet findPetFromListByName(List<Pet> listOfPets, String petName) {
+        for (Pet pet : listOfPets) {
+            if (pet.getName().equals(petName)) {
+                return pet;
+            }
+        }
+        return null;
+    }
 
 
 }

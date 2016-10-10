@@ -9,7 +9,7 @@ public class PetFeederBeef implements PetFeeder {
     public String feed(Pet abstractPet, int amountOfFood) {
 
 
-        int newHunger = abstractPet.getHunger() + amountOfFood * 2;
+        int newHunger = abstractPet.getHunger() - amountOfFood * 2;
 
 
         if (newHunger >= 0 && newHunger <= 100) {

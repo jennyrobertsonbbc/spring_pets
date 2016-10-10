@@ -9,7 +9,7 @@ public class PetFeederHam implements PetFeeder {
     public String feed(Pet abstractPet, int amountOfFood) {
 
 
-        int newHunger = abstractPet.getHunger()+amountOfFood * 1;
+        int newHunger = abstractPet.getHunger()- amountOfFood * 1;
 
         return String.format("Feeding %s the %s %d slices of ham.\n", abstractPet.getName(), abstractPet.getClass().getSimpleName(), amountOfFood);
 //
