@@ -24,17 +24,17 @@ public class ResourceController {
 
 
     //these are all gets
-    @RequestMapping("/hello")
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String returnStringFromURL() {
         return "hello";
     }
 
-    @RequestMapping("/hello/{forename}/{surname}")
+    @RequestMapping(value = "/hello/{forename}/{surname}", method = RequestMethod.GET)
     public String returnStringFromURL2(@PathVariable String forename, @PathVariable String surname) {
         return "hello" + forename + surname;
     }
 
-    @RequestMapping("/pets")
+    @RequestMapping(value = "/pets", method = RequestMethod.GET)
     public List<Pet> returnListOfPets() {
         listOfPets = petRepository.load();
         System.out.println(listOfPets);
@@ -43,7 +43,7 @@ public class ResourceController {
 
     //TODO make Mr. Pompadoor work with this:
 
-    @RequestMapping("pets/{name}")
+    @RequestMapping(value = "pets/{name}", method = RequestMethod.GET)
     public Pet returnPetByName(@PathVariable String name) {
         listOfPets = petRepository.load();
         return findPetFromListByName(listOfPets,name);
@@ -78,7 +78,7 @@ public class ResourceController {
         return listOfPets.get(listOfPets.size() - 1);
     }
 
-    @RequestMapping("pets/{name}/feed/{amount}/{foodType}")
+    @RequestMapping(value = "pets/{name}/feed/{amount}/{foodType}", method = RequestMethod.GET)
     public String feedPet(@PathVariable String name, @PathVariable Integer amount, @PathVariable String foodType) {
         listOfPets = petRepository.load();
         String output;
