@@ -12,11 +12,10 @@ import java.util.List;
  */
 public class PetExtractor {
 
-    public List<Pet> petList = new ArrayList<Pet>();
 
 
     public List<Pet> extract() {
-
+        List<Pet> petList = new ArrayList<Pet>();
         DBQuery dbQuery = new DBQuery();
 
         ResultSet resultSet = dbQuery.sendSelectQuery("SELECT * FROM pets ORDER BY pet_id ASC;");
@@ -55,11 +54,6 @@ public class PetExtractor {
             //JDBCTutorialUtilities.printSQLException(e);
         }
 
-//        for (
-//                Pet pet : petList) {
-//            System.out.println(pet.toString());
-//        }
-//        System.out.println("\n");
 
         return petList;
     }

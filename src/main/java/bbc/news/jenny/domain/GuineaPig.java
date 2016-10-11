@@ -8,6 +8,10 @@ public class GuineaPig extends AbstractPet {
         super(petId, ownerId, name, age, hunger, petTypeId);
     }
 
+    public GuineaPig(int ownerId, String name, int age, int hunger, int petTypeId) {
+        super(ownerId, name, age, hunger, petTypeId);
+    }
+
     public void speak(int numberOfTimes){
         for(int i = 0;i < numberOfTimes; i++){
             System.out.println("ee");

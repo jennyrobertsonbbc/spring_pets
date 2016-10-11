@@ -1,5 +1,7 @@
 package bbc.news.jenny.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created by roberj78 on 29/09/2016.
  */
@@ -14,6 +16,14 @@ abstract class AbstractPet implements Pet{
 
     public AbstractPet(int petId, int ownerId, String name, int age, int hunger, int petTypeId) {
         this.petId = petId;
+        this.ownerId = ownerId;
+        this.name = name;
+        this.age = age;
+        this.hunger = hunger;
+        this.petTypeId = petTypeId;
+    }
+
+    public AbstractPet(int ownerId, String name, int age, int hunger, int petTypeId) {
         this.ownerId = ownerId;
         this.name = name;
         this.age = age;
@@ -84,4 +94,5 @@ abstract class AbstractPet implements Pet{
                 ", petTypeId=" + petTypeId +
                 '}';
     }
+
 }

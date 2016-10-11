@@ -16,9 +16,11 @@ public class ResourceController {
     private PetRepository petRepository = new PetRepository();
     private OwnerRepository ownerRepository = new OwnerRepository();
 
+
     //Load from database
     private List<Pet> listOfPets = petRepository.load();
     private List<Owner> listOfOwners = ownerRepository.load();
+    //private List<PetType> listOfPetTypes =
 
 
     //these are all gets
@@ -32,8 +34,11 @@ public class ResourceController {
         return "hello" + forename + surname;
     }
 
-    @RequestMapping("pets")
+    @RequestMapping("/pets")
     public List<Pet> returnListOfPets() {
+        System.out.println(listOfPets);
+        listOfPets = petRepository.load();
+        System.out.println(listOfPets);
         return listOfPets;
     }
 
@@ -41,41 +46,47 @@ public class ResourceController {
 
     @RequestMapping("pets/{name}")
     public Pet returnPetByName(@PathVariable String name) {
+        listOfPets = petRepository.load();
         return findPetFromListByName(listOfPets,name);
     }
 
+    //todo Make it so you can say the word for the animal instead of the number
+    //todo make it so it inserts it to the database, (which generates the correct petid)
     @RequestMapping(value = "pets/new/{ownerId}/{name}/{age}/{hunger}/{petTypeId}", method = RequestMethod.GET)
     public Pet makeNewPet(@PathVariable int ownerId, @PathVariable String name, @PathVariable int age,
                           @PathVariable int hunger, @PathVariable int petTypeId) {
 
+        listOfPets = petRepository.load();
+
         switch (petTypeId) {
             case 1:
-                listOfPets.add(new GuineaPig(0, ownerId, name, age, hunger, petTypeId));
+                listOfPets.add(new GuineaPig(ownerId, name, age, hunger, petTypeId));
                 break;
             case 2:
-                listOfPets.add(new Cat(0, ownerId, name, age, hunger, petTypeId, 5));
+                listOfPets.add(new Cat(ownerId, name, age, hunger, petTypeId, 5));
                 break;
             case 3:
-                listOfPets.add(new Pig(0, ownerId, name, age, hunger, petTypeId));
+                listOfPets.add(new Pig(ownerId, name, age, hunger, petTypeId));
                 break;
             case 4:
-                listOfPets.add(new Dog(0, ownerId, name, age, hunger, petTypeId, true));
+                listOfPets.add(new Dog(ownerId, name, age, hunger, petTypeId, true));
                 break;
         }
+
+        petRepository.save(listOfPets);
+        listOfPets = petRepository.load();
 
         return listOfPets.get(listOfPets.size() - 1);
     }
 
     @RequestMapping("pets/{name}/feed/{amount}/{foodType}")
     public String feedPet(@PathVariable String name, @PathVariable int amount, @PathVariable String foodType) {
+        listOfPets = petRepository.load();
         String output;
         switch (foodType) {
             case "beef":
             case "Beef":
                 PetFeederBeef petFeederBeef = new PetFeederBeef();
-
-
-                //TODO fix this too
                 output = petFeederBeef.feed(findPetFromListByName(listOfPets,name), amount);
                 break;
             case "ham":
@@ -86,6 +97,7 @@ public class ResourceController {
             default:
                 output = "";
         }
+        petRepository.save(listOfPets);
         return output;
 
     }
@@ -110,6 +122,24 @@ public class ResourceController {
         }
         return null;
     }
+
+//    //todo Make this work from database, but then the extractor will still be using a case statement so whats the point
+//    public String getTypeNameFromTypeId(int petTypeId){
+//        switch (petTypeId) {
+//            case 1://guineapig
+//                return "Guinea Pig";
+//            case 2://cat
+//                return "Cat";
+//            case 3://pig
+//                return "Pig";
+//            case 4://dog
+//                return "Dog";
+//            default:
+//                return null;
+//        }
+//
+//    }
+
 
 
 }

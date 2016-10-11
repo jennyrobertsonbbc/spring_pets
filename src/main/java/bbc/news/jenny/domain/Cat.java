@@ -11,6 +11,11 @@ public class Cat extends AbstractPet {
         this.number_of_whiskers = number_of_whiskers;
     }
 
+    public Cat(int ownerId, String name, int age, int hunger, int petTypeId, int number_of_whiskers) {
+        super(ownerId, name, age, hunger, petTypeId);
+        this.number_of_whiskers = number_of_whiskers;
+    }
+
     public void speak(int numberOfTimes){
         for(int i = 0;i < numberOfTimes; i++){
             System.out.println("Meow! ");
