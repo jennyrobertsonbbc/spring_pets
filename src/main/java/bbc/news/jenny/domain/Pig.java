@@ -6,15 +6,15 @@ package bbc.news.jenny.domain;
 public class Pig extends AbstractPet {
     //only we can do it
 
-    public Pig(int petId, int ownerId, String name, int age, int hunger, int petTypeId) {
+    public Pig(Integer petId, Integer ownerId, String name, Integer age, Integer hunger, Integer petTypeId) {
         super(petId, ownerId, name, age, hunger, petTypeId);
     }
 
-    public Pig(int ownerId, String name, int age, int hunger, int petTypeId) {
+    public Pig(Integer ownerId, String name, Integer age, Integer hunger, Integer petTypeId) {
         super(ownerId, name, age, hunger, petTypeId);
     }
 
-    public void speak(int numberOfTimes){
+    public void speak(Integer numberOfTimes){
         for(int i = 0;i < numberOfTimes; i++){
             System.out.println("Oink! ");
         }

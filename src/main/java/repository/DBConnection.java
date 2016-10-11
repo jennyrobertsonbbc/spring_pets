@@ -9,7 +9,7 @@ public class DBConnection {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "org.postgresql.Driver";
     static final String DB_URL = "jdbc:postgresql://localhost/";
-    static final String EXISTING_DATABASE_NAME = "roberj78";
+    static final String EXISTING_DATABASE_NAME = "petsdb";
 
     //  Database credentials
     // Your database username and password

@@ -36,7 +36,6 @@ public class ResourceController {
 
     @RequestMapping("/pets")
     public List<Pet> returnListOfPets() {
-        System.out.println(listOfPets);
         listOfPets = petRepository.load();
         System.out.println(listOfPets);
         return listOfPets;
@@ -53,8 +52,8 @@ public class ResourceController {
     //todo Make it so you can say the word for the animal instead of the number
     //todo make it so it inserts it to the database, (which generates the correct petid)
     @RequestMapping(value = "pets/new/{ownerId}/{name}/{age}/{hunger}/{petTypeId}", method = RequestMethod.GET)
-    public Pet makeNewPet(@PathVariable int ownerId, @PathVariable String name, @PathVariable int age,
-                          @PathVariable int hunger, @PathVariable int petTypeId) {
+    public Pet makeNewPet(@PathVariable Integer ownerId, @PathVariable String name, @PathVariable Integer age,
+                          @PathVariable Integer hunger, @PathVariable Integer petTypeId) {
 
         listOfPets = petRepository.load();
 
@@ -80,7 +79,7 @@ public class ResourceController {
     }
 
     @RequestMapping("pets/{name}/feed/{amount}/{foodType}")
-    public String feedPet(@PathVariable String name, @PathVariable int amount, @PathVariable String foodType) {
+    public String feedPet(@PathVariable String name, @PathVariable Integer amount, @PathVariable String foodType) {
         listOfPets = petRepository.load();
         String output;
         switch (foodType) {
@@ -124,7 +123,7 @@ public class ResourceController {
     }
 
 //    //todo Make this work from database, but then the extractor will still be using a case statement so whats the point
-//    public String getTypeNameFromTypeId(int petTypeId){
+//    public String getTypeNameFromTypeId(Integer petTypeId){
 //        switch (petTypeId) {
 //            case 1://guineapig
 //                return "Guinea Pig";

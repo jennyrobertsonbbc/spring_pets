@@ -25,9 +25,9 @@ public class OwnerExtractor {
         try {
             while (resultSet.next()) {
 
-                int ownerId = resultSet.getInt("owner_id");
+                Integer ownerId = resultSet.getInt("owner_id");
                 String ownerName = resultSet.getString("owner_name");
-                int ownerAge = resultSet.getInt("owner_age");
+                Integer ownerAge = resultSet.getInt("owner_age");
 
                 ownerList.add(new Owner(ownerId,ownerName,ownerAge));
 

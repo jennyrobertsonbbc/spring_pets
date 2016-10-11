@@ -24,12 +24,12 @@ public class PetExtractor {
         try {
             while (resultSet.next()) {
 
-                int petId = resultSet.getInt("pet_id");
-                int ownerId = resultSet.getInt("owner_id");
+                Integer petId = resultSet.getInt("pet_id");
+                Integer ownerId = resultSet.getInt("owner_id");
                 String petName = resultSet.getString("pet_name");
-                int petAge = resultSet.getInt("pet_age");
-                int petHunger = resultSet.getInt("pet_hunger");
-                int petTypeId = resultSet.getInt("pet_type_id");
+                Integer petAge = resultSet.getInt("pet_age");
+                Integer petHunger = resultSet.getInt("pet_hunger");
+                Integer petTypeId = resultSet.getInt("pet_type_id");
 
 
                 switch (petTypeId) {
