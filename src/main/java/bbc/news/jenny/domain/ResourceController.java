@@ -20,7 +20,6 @@ public class ResourceController {
     //Load from database
     private List<Pet> listOfPets = petRepository.load();
     private List<Owner> listOfOwners = ownerRepository.load();
-    //private List<PetType> listOfPetTypes =
 
 
     //these are all gets
@@ -37,7 +36,6 @@ public class ResourceController {
     @RequestMapping(value = "/pets", method = RequestMethod.GET)
     public List<Pet> returnListOfPets() {
         listOfPets = petRepository.load();
-        System.out.println(listOfPets);
         return listOfPets;
     }
 
@@ -50,7 +48,6 @@ public class ResourceController {
     }
 
     //todo Make it so you can say the word for the animal instead of the number
-    //todo make it so it inserts it to the database, (which generates the correct petid)
     @RequestMapping(value = "pets/new/{ownerId}/{name}/{age}/{hunger}/{petTypeId}", method = RequestMethod.GET)
     public Pet makeNewPet(@PathVariable Integer ownerId, @PathVariable String name, @PathVariable Integer age,
                           @PathVariable Integer hunger, @PathVariable Integer petTypeId) {
@@ -114,9 +111,12 @@ public class ResourceController {
     }
 
     private Pet findPetFromListByName(List<Pet> listOfPets, String petName) {
+        System.out.println("pet name from URL: " + petName);
         for (Pet pet : listOfPets) {
+
             if (pet.getName().equals(petName)) {
                 return pet;
+
             }
         }
         return null;
@@ -140,5 +140,5 @@ public class ResourceController {
 //    }
 
 
-
 }
+

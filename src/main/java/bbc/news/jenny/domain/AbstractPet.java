@@ -95,4 +95,24 @@ abstract class AbstractPet implements Pet{
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AbstractPet that = (AbstractPet) o;
+
+        if (petId != null ? !petId.equals(that.petId) : that.petId != null) return false;
+        if (ownerId != null ? !ownerId.equals(that.ownerId) : that.ownerId != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (age != null ? !age.equals(that.age) : that.age != null) return false;
+        if (hunger != null ? !hunger.equals(that.hunger) : that.hunger != null) return false;
+        return petTypeId != null ? petTypeId.equals(that.petTypeId) : that.petTypeId == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
+    }
 }

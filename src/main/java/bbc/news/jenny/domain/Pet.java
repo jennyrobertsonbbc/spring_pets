@@ -30,4 +30,6 @@ public interface Pet {
     public void setPetTypeId(Integer petTypeId);
 
     public void speak(Integer numberOfTimes);
+
+
 }
