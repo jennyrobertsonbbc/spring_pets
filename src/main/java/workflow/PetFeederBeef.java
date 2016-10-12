@@ -6,10 +6,10 @@ import bbc.news.jenny.domain.Pet;
  * Created by roberj78 on 29/09/2016.
  */
 public class PetFeederBeef implements PetFeeder {
-    public String feed(Pet abstractPet, int amountOfFood) {
+    public String feed(Pet abstractPet, Integer amountOfFood) {
 
 
-        int newHunger = abstractPet.getHunger() + amountOfFood * 2;
+        Integer newHunger = abstractPet.getHunger() - amountOfFood * 2;
 
 
         if (newHunger >= 0 && newHunger <= 100) {

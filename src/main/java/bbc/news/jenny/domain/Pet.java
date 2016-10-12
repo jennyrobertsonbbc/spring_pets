@@ -5,29 +5,31 @@ package bbc.news.jenny.domain;
  */
 public interface Pet {
 
-    public int getHunger();
+    public Integer getHunger();
 
-    public void setHunger(int hunger);
+    public void setHunger(Integer hunger);
 
     public String getName();
 
     public void setName(String name);
 
-    public int getAge();
+    public Integer getAge();
 
-    public void setAge(int age);
+    public void setAge(Integer age);
 
-    public int getPetId();
+    public Integer getPetId();
 
-    public void setPetId(int petId);
+    public void setPetId(Integer petId);
 
-    public int getOwnerId();
+    public Integer getOwnerId();
 
-    public void setOwnerId(int ownerId);
+    public void setOwnerId(Integer ownerId);
 
-    public int getPetTypeId();
+    public Integer getPetTypeId();
 
-    public void setPetTypeId(int petTypeId);
+    public void setPetTypeId(Integer petTypeId);
 
-    public void speak(int numberOfTimes);
+    public void speak(Integer numberOfTimes);
+
+
 }

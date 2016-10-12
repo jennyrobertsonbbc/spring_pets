@@ -6,18 +6,18 @@ import java.util.List;
  * Created by roberj78 on 03/10/2016.
  */
 public class Owner {
-    private int ownerID;
+    private Integer ownerID;
     private String name;
-    private int age;
+    private Integer age;
     private List<Pet> petsOwned;
 
-    public Owner(int ownerID, String name, int age) {
+    public Owner(Integer ownerID, String name, Integer age) {
         this.ownerID = ownerID;
         this.name = name;
         this.age = age;
     }
 
-    public int getOwnerID() {
+    public Integer getOwnerID() {
         return ownerID;
     }
 
@@ -29,11 +29,11 @@ public class Owner {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
