@@ -1,40 +1,35 @@
-console.log("test");
-
 $(document).ready(function(){
-    $("p").click(function(){
-        $(this).hide();
-    });
 
-
-    $('#form').on('submit', function(e){
-
-        e.preventDefault();
-        var values = {};
-        $.each($('#form').serializeArray(), function(i, field) {
-            values[field.name] = field.value;
-        });
-        console.log(values);
-
-
-        $.get("http://localhost:8080/pets/new/" +
-            + values.petOwnerId + "/"
-            + values.petName + "/"
-            + values.petAge + "/"
-            + values.petHunger + "/"
-            + values.petTypeId
-            ,function(data) {
-
-                addNewPet(data);
-            });
-    });
-
+    //load in all the pets from database and display
     $.get("http://localhost:8080/pets", function(data) {
-      $.each(data, function(i, pet) {
-        addNewPet(pet);
+        $.each(data, function(i, pet) {
+            addNewPet(pet);
+        });
     });
 
+    //when form submitted
+    $('#form').on('submit', function(e){
+        e.preventDefault();
 
-  });
+        //make an array
+        var valuesFromForm = {};
+        //Save the values from the form in a named array
+        $.each($('#form').serializeArray(), function(i, field) {
+            valuesFromForm[field.name] = field.value;
+        });
+
+        //get request of the url to make a new pet
+        $.get("http://localhost:8080/pets/new/" +
+            + valuesFromForm.petOwnerId + "/"
+            + valuesFromForm.petName + "/"
+            + valuesFromForm.petAge + "/"
+            + valuesFromForm.petHunger + "/"
+            + valuesFromForm.petTypeId
+            ,function(data) {
+                //with the json returned, add a new pet
+                addNewPet(data);
+        });
+    });
 });
 
 function addNewPet(pet){
