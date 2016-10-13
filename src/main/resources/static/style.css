@@ -1,0 +1,113 @@
+*{
+	padding: 0;
+	margin: 0;
+	font-family: arial;
+}
+
+body{
+	background-color:  #ffffcc;
+}
+
+#header{
+	width: 100%;
+	clear: both;
+	background-color: grey;
+	display: table;
+	background-color: #b7c6ce;
+}
+#contents{
+	width: 100%;
+	clear: both;
+	background-color: green;
+}
+.showPet{
+	width: 350px;
+	height: 100px;
+	background-color: #dee8e7;
+	padding: 5px;
+	margin: 5px;
+	display: table;
+	float: left;
+	overflow: hidden;
+	border-radius: 10px;
+	border: 1px solid black;
+}
+.petImage{
+	width: 100px;
+	height: 50px;
+	padding: 5px;
+	float: left;
+}
+
+
+
+.petColumnLeft, .petColumnMiddle, .petColumnRight{
+	width: 33.33%;
+	height: 70%;
+}
+.petColumnLeft{
+	float: left;
+}
+.petColumnRight{
+	float:right;
+	width: 25%;
+
+}
+.petColumnMiddle{
+	float:left;
+}
+.petRowBottom{
+	width: 100%;
+	height: 30%;
+	float: left;
+	background-color: #b7c6ce;
+	border-radius: 10px;
+}
+button{
+	display: block;
+	float: left;
+	padding: 10px;
+	width: 100px;
+	margin: 5px;
+	height: 30px;
+	font-size: 13px;
+}
+form{
+	clear:both;
+}
+
+/*Slider*/
+.petHungerSlider{
+	background-color: white;
+	width: 180px;
+	height: 28px;
+	float: right;
+	margin: 5px;
+	position: relative;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.petHungerSliderInner{
+	background-color: orange;
+	height: 30px;
+	z-index: 3;
+	
+
+}
+
+.petHungerSliderHearts{
+	height: 30px;
+	background-image: url("images/pixelheart.png");
+	background-size: 30px 30px;
+    background-repeat: x;
+ 
+    z-index: 100;
+    position: absolute;
+    width: 181px;
+   
+
+}
+
+
+

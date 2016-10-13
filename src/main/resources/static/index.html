@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="script.js"></script>
+	<meta charset="UTF-8">
+	<title>Pets in the database</title>
+</head>
+<body>
+	<div id ="container">
+
+		<div id="header">
+			<h1>Pets</h1>
+			<br>
+
+			<form>
+				<table>
+					<tr>
+						<td>Pet name:</td>
+						<td> <input name="inputPetName"></td>
+					</tr>
+					<tr>
+						<td>Pet type: </td>
+						<td>
+							<select>
+								<option value="1">Guinea Pig</option>
+								<option value="2">Cat</option>
+								<option value="3">Pig</option>
+								<option value="4">Dog</option>
+							</select>
+						</td>
+					<tr>
+						<td>Pet age:</td>
+						<td><input name="inputPetName"></td>
+					<tr>
+						<td>Pet hunger:</td>
+						 <td><input type="range" id="myRange" value="50"></td>
+					</tr>
+					<tr>
+						<td>Pet owner:</td>
+						<td> <select>
+								<option value="3">Jenny</option>
+								<option value="4">Gareth</option>
+							</select>
+
+						</td>
+					</tr>
+				</table>
+
+				<button id="addNewPetButton">Add new pet</button>
+
+		</form>
+
+	</div>
+
+
+	<div id="contents">
+
+		<div class="showPet">
+
+			<div class="petColumnLeft">
+				<img class="petImage" src="images/dog.png"/>
+			</div>
+
+			<div class="petColumnMiddle">
+				<h2 class="petName">Test1</h2>
+				<span class="petAge">5 years old</span>
+			</div>
+
+			<div class="petColumnRight">
+				<span class="petOwner">Owned by Jenny</span><br>
+				<!-- <span class="petHunger">Hunger: 45 </span><br> -->
+				<span class="petId">Id: 0 </span>
+
+			</div>
+
+			<div class="petRowBottom">
+				<button>Feed</button>
+
+
+				<div class="petHungerSlider">
+					<div class="petHungerSliderHearts"></div>
+
+					<div class="petHungerSliderInner" style="width: 55%"></div>
+
+
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+
+
+
+
+</div><!-- container -->
+</body>
+
+</html>
