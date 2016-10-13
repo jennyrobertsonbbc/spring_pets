@@ -6,14 +6,42 @@ $(document).ready(function(){
     });
 
 
+    $( "#addNewPetButton" ).click(function() {
+         //alert( "Handler for .click() called." );
+
+         window.location.replace("http://www.google.com");
+
+
+    });
+
+
+
+
      $.get("http://localhost:8080/pets", function(data) {
           $.each(data, function(i, pet) {
+
+            switch (pet.petTypeId){
+                case 1:
+                    imageSrc = "images/guineapig.png";
+                    break;
+                case 2:
+                    imageSrc = "images/cat.png";
+                    break;
+                case 3:
+                    imageSrc = "images/pig.png";
+                    break;
+                case 4:
+                    imageSrc = "images/dog.png";
+                    break;
+            }
+
+            
 
                         $("#container").append(
             '<div class="showPet">'+
 
            '<div class="petColumnLeft">'+
-                '<img class="petImage" src=""/>'+
+                '<img class="petImage" src="'+ imageSrc +'"/>'+
             '</div>'+
 
            '<div class="petColumnMiddle">'+

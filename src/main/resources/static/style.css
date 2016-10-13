@@ -8,6 +8,18 @@ body{
 	background-color:  #ffffcc;
 }
 
+#header{
+	width: 100%;
+	clear: both;
+	background-color: grey;
+	display: table;
+	background-color: #b7c6ce;
+}
+#contents{
+	width: 100%;
+	clear: both;
+	background-color: green;
+}
 .showPet{
 	width: 350px;
 	height: 100px;
@@ -38,6 +50,8 @@ body{
 }
 .petColumnRight{
 	float:right;
+	width: 25%;
+
 }
 .petColumnMiddle{
 	float:left;
@@ -58,6 +72,9 @@ button{
 	height: 30px;
 	font-size: 13px;
 }
+form{
+	clear:both;
+}
 
 /*Slider*/
 .petHungerSlider{
@@ -72,7 +89,7 @@ button{
 }
 
 .petHungerSliderInner{
-	background-color: fuchsia;
+	background-color: orange;
 	height: 30px;
 	z-index: 3;
 	
@@ -81,7 +98,7 @@ button{
 
 .petHungerSliderHearts{
 	height: 30px;
-	background-image: url("pixelheart.png");
+	background-image: url("images/pixelheart.png");
 	background-size: 30px 30px;
     background-repeat: x;
  
