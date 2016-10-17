@@ -38,7 +38,9 @@ body{
 	padding: 5px;
 	float: left;
 }
-
+.petName{
+	size: 10px;
+}
 
 
 .petColumnLeft, .petColumnMiddle, .petColumnRight{
@@ -55,6 +57,7 @@ body{
 }
 .petColumnMiddle{
 	float:left;
+
 }
 .petRowBottom{
 	width: 100%;

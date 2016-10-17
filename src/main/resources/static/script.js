@@ -1,77 +1,86 @@
-console.log("test");
-
 $(document).ready(function(){
-    $("p").click(function(){
-        $(this).hide();
+
+    //load in all the pets from database and display
+    $.get("http://localhost:8080/pets", function(data) {
+        $.each(data, function(i, pet) {
+            addNewPet(pet);
+        });
     });
 
+    //when form submitted
+    $('#form').on('submit', function(e){
+        e.preventDefault();
 
-    $( "#addNewPetButton" ).click(function() {
-         //alert( "Handler for .click() called." );
+        //make an array
+        var valuesFromForm = {};
+        //Save the values from the form in a named array
+        $.each($('#form').serializeArray(), function(i, field) {
+            valuesFromForm[field.name] = field.value;
+        });
 
-         window.location.replace("http://www.google.com");
-
-
+        //get request of the url to make a new pet
+        $.get("http://localhost:8080/pets/new/" +
+            + valuesFromForm.petOwnerId + "/"
+            + valuesFromForm.petName + "/"
+            + valuesFromForm.petAge + "/"
+            + valuesFromForm.petHunger + "/"
+            + valuesFromForm.petTypeId
+            ,function(data) {
+                //with the json returned, add a new pet
+                addNewPet(data);
+        });
     });
+});
 
+function addNewPet(pet){
 
+    switch (pet.petTypeId){
+        case 1:
+        imageSrc = "images/guineapig.png";
+        break;
+        case 2:
+        imageSrc = "images/cat.png";
+        break;
+        case 3:
+        imageSrc = "images/pig.png";
+        break;
+        case 4:
+        imageSrc = "images/dog.png";
+        break;
+    }
 
+    $("#contents").prepend(
+        '<div class="showPet">'+
 
-     $.get("http://localhost:8080/pets", function(data) {
-          $.each(data, function(i, pet) {
+        '<div class="petColumnLeft">'+
+        '<img class="petImage" src="'+ imageSrc +'"/>'+
+        '</div>'+
 
-            switch (pet.petTypeId){
-                case 1:
-                    imageSrc = "images/guineapig.png";
-                    break;
-                case 2:
-                    imageSrc = "images/cat.png";
-                    break;
-                case 3:
-                    imageSrc = "images/pig.png";
-                    break;
-                case 4:
-                    imageSrc = "images/dog.png";
-                    break;
-            }
+        '<div class="petColumnMiddle">'+
+        '<h2 class="petName">' + pet.name + '</h2>'+
+        '<span class="petAge">' + pet.age + ' years old</span>'+
+        '</div>'+
 
-            
-
-                        $("#container").append(
-            '<div class="showPet">'+
-
-           '<div class="petColumnLeft">'+
-                '<img class="petImage" src="'+ imageSrc +'"/>'+
-            '</div>'+
-
-           '<div class="petColumnMiddle">'+
-                '<h2 class="petName">' + pet.name + '</h2>'+
-                '<span class="petAge">' + pet.age + ' years old</span>'+
-            '</div>'+
-
-            '<div class="petColumnRight">'+
-                '<span class="petOwner">Owned by ' + pet.ownerId + '</span><br>'+
+        '<div class="petColumnRight">'+
+        '<span class="petOwner">Owned by ' + pet.ownerId + '</span><br>'+
                 // '<span class="petHunger">Hunger: ' + pet.hunger + '</span><br>'+
                 '<span class="petId">Id: ' + pet.petId +'</span>'+
 
-            '</div>'+
+                '</div>'+
 
-            '<div class="petRowBottom">'+
+                '<div class="petRowBottom">'+
                 '<button>Feed</button>'+
 
                 '<div class="petHungerSlider">'+
                 '<div class="petHungerSliderHearts"></div>'+
-                    
-                    '<div class="petHungerSliderInner" style="width:'+ pet.hunger + '%"></div>'+
+
+                '<div class="petHungerSliderInner" style="width:'+ pet.hunger + '%"></div>'+
 
                 '</div>'+
 
-           ' </div>'+
+                ' </div>'+
 
-        '</div><!-- show pet -->');
-                    });
-
-                });
-});
+                '</div><!-- show pet -->');
+}
 
 

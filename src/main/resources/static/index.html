@@ -14,16 +14,16 @@
 			<h1>Pets</h1>
 			<br>
 
-			<form>
+			<form id="form">
 				<table>
 					<tr>
 						<td>Pet name:</td>
-						<td> <input name="inputPetName"></td>
+						<td> <input name="petName"></td>
 					</tr>
 					<tr>
 						<td>Pet type: </td>
 						<td>
-							<select>
+							<select name="petTypeId">
 								<option value="1">Guinea Pig</option>
 								<option value="2">Cat</option>
 								<option value="3">Pig</option>
@@ -32,14 +32,14 @@
 						</td>
 					<tr>
 						<td>Pet age:</td>
-						<td><input name="inputPetName"></td>
+						<td><input name="petAge"></td>
 					<tr>
 						<td>Pet hunger:</td>
-						 <td><input type="range" id="myRange" value="50"></td>
+						 <td><input name= "petHunger" type="range" id="myRange" value="50"></td>
 					</tr>
 					<tr>
 						<td>Pet owner:</td>
-						<td> <select>
+						<td> <select name="petOwnerId">
 								<option value="3">Jenny</option>
 								<option value="4">Gareth</option>
 							</select>
@@ -48,7 +48,7 @@
 					</tr>
 				</table>
 
-				<button id="addNewPetButton">Add new pet</button>
+			<input type="submit" id="submit" name="submit" value="Send">
 
 		</form>
 
@@ -64,7 +64,7 @@
 			</div>
 
 			<div class="petColumnMiddle">
-				<h2 class="petName">Test1</h2>
+				<h2 class="petName">Test</h2>
 				<span class="petAge">5 years old</span>
 			</div>
 
