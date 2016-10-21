@@ -41,8 +41,6 @@ body{
 .petName{
 	size: 10px;
 }
-
-
 .petColumnLeft, .petColumnMiddle, .petColumnRight{
 	width: 33.33%;
 	height: 70%;
