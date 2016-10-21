@@ -44,7 +44,7 @@ public class ResourceController {
     @RequestMapping(value = "pets/{name}", method = RequestMethod.GET)
     public Pet returnPetByName(@PathVariable String name) {
         listOfPets = petRepository.load();
-        return findPetFromListByName(listOfPets,name);
+        return findPetFromListByName(listOfPets, name);
     }
 
     //todo Make it so you can say the word for the animal instead of the number
@@ -83,12 +83,12 @@ public class ResourceController {
             case "beef":
             case "Beef":
                 PetFeederBeef petFeederBeef = new PetFeederBeef();
-                output = petFeederBeef.feed(findPetFromListByName(listOfPets,name), amount);
+                output = petFeederBeef.feed(findPetFromListByName(listOfPets, name), amount);
                 break;
             case "ham":
             case "Ham":
                 PetFeederHam petFeederHam = new PetFeederHam();
-                output = petFeederHam.feed(findPetFromListByName(listOfPets,name), amount);
+                output = petFeederHam.feed(findPetFromListByName(listOfPets, name), amount);
                 break;
             default:
                 output = "";
@@ -98,6 +98,19 @@ public class ResourceController {
 
     }
 
+    @RequestMapping(value = "pets/{name}/delete", method = RequestMethod.GET)
+    public List<Pet> deletePet(@PathVariable String name) {
+        listOfPets = petRepository.load();
+
+        Pet pet = findPetFromListByName(listOfPets, name);
+
+        petRepository.delete(pet);
+        listOfPets = petRepository.load();
+
+
+        return listOfPets;
+
+    }
 
     //***POST
     @RequestMapping(value = "/test", method = RequestMethod.POST)

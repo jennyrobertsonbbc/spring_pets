@@ -25,4 +25,10 @@ public class OwnerRepository implements Repository<Owner> {
         ownerSaver.save(listOfOwners);
     }
 
+    public void delete(Owner owner) {
+        System.out.println("Deleting from database");
+        //todo add owner deleter
+
+    }
+
 }
