@@ -66,7 +66,7 @@ body{
 	background-color: #b7c6ce;
 	border-radius: 10px;
 }
-button{
+.feed_button {
 	display: block;
 	float: left;
 	padding: 10px;
@@ -75,6 +75,14 @@ button{
 	height: 30px;
 	font-size: 13px;
 }
+.delete_button {
+ 	display: block;
+ 	float: left;
+ 	padding: 5px;
+ 	margin: 5px;
+ 	font-size: 13px;
+ 	float: left;
+ }
 form{
 	clear:both;
 }

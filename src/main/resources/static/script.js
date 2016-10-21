@@ -30,6 +30,17 @@ $(document).ready(function(){
                 addNewPet(data);
         });
     });
+
+        //when delete button clicked
+        $("#contents").on("click", "button.delete_button", function(){
+            var petNameToDelete = $(this).parent().parent().find('.petName').html();
+            console.log(petNameToDelete);
+            $(this).parent().parent().remove();
+
+            $.get("http://localhost:8080/pets/"+ petNameToDelete + "/delete/");
+
+    });
+
 });
 
 function addNewPet(pet){
@@ -69,7 +80,8 @@ function addNewPet(pet){
                 '</div>'+
 
                 '<div class="petRowBottom">'+
-                '<button>Feed</button>'+
+                '<button class="feed_button">Feed</button>'+
+                '<button class="delete_button">X</button>'+
 
                 '<div class="petHungerSlider">'+
                 '<div class="petHungerSliderHearts"></div>'+
