@@ -1,4 +1,4 @@
-package repository;
+package bbc.news.jenny.repository;
 
 import bbc.news.jenny.domain.Pet;
 

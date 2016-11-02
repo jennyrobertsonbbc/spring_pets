@@ -1,4 +1,4 @@
-package workflow;
+package bbc.news.jenny.workflow;
 
 import bbc.news.jenny.domain.Pet;
 

@@ -1,8 +1,6 @@
-package repository;
+package bbc.news.jenny.repository;
 
 import bbc.news.jenny.domain.Pet;
-
-import java.util.List;
 
 /**
  * Created by roberj78 on 07/10/2016.

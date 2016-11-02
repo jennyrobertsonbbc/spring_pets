@@ -2,30 +2,21 @@ package bbc.news.jenny.domain;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import repository.OwnerRepository;
-import repository.PetRepository;
-import workflow.PetFeeder;
-import workflow.PetFeederBeef;
-import workflow.PetFeederHam;
+import org.springframework.context.ApplicationContext;
 
-import java.util.List;
+import java.util.Arrays;
 
 @SpringBootApplication
 public class PetsApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PetsApplication.class, args);
+    public static void main(String[] args) {
+        ApplicationContext ctx = SpringApplication.run(PetsApplication.class, args);
 
+        String[] beanNames = ctx.getBeanDefinitionNames();
+        Arrays.sort(beanNames);
+        for (String beanName : beanNames) {
+            System.out.println(beanName);
+        }
 
-
-
-
-
-
-
-
-
-
-
-	}
+    }
 }

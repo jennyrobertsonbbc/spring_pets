@@ -1,4 +1,4 @@
-package repository;
+package bbc.news.jenny.repository;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
