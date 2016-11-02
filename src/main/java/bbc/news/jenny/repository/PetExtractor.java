@@ -1,25 +1,24 @@
 package bbc.news.jenny.repository;
 
 import bbc.news.jenny.domain.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by roberj78 on 06/10/2016.
- */
+@Controller
 public class PetExtractor {
 
-
+    @Autowired
+    private DBQuery dbQuery;
 
     public List<Pet> extract() {
-        List<Pet> petList = new ArrayList<Pet>();
-        DBQuery dbQuery = new DBQuery();
-
+        List<Pet> petList = new ArrayList<Pet>();//todo does this need to be a bean?
         ResultSet resultSet = dbQuery.sendSelectQuery("SELECT * FROM pets ORDER BY pet_id ASC;");
-
 
         try {
             while (resultSet.next()) {

@@ -1,16 +1,21 @@
 package bbc.news.jenny.repository;
 
 import bbc.news.jenny.domain.Pet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Created by roberj78 on 07/10/2016.
- */
+@Repository
 public class PetSaver {
+
+    @Autowired
+    private DBQuery dbQuery;
+
     public void save(List<Pet> listOfPets) {
 
-        DBQuery dbQuery = new DBQuery();
+
         String query = "";
 
         for (Pet pet : listOfPets) {

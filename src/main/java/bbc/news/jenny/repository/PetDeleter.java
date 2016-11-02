@@ -1,14 +1,17 @@
 package bbc.news.jenny.repository;
 
 import bbc.news.jenny.domain.Pet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
-/**
- * Created by roberj78 on 07/10/2016.
- */
+@Controller
 public class PetDeleter {
+    @Autowired
+    DBQuery dbQuery;
+
     public void delete(Pet pet) {
 
-        DBQuery dbQuery = new DBQuery();
+
         String query = "";
 
 //        query = String.format("UPDATE pets SET " +

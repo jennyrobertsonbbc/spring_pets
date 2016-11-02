@@ -2,8 +2,8 @@ package bbc.news.jenny.domain;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import bbc.news.jenny.repository.OwnerRepository;
 import bbc.news.jenny.repository.PetRepository;
 import bbc.news.jenny.utils.PetUtils;
 import bbc.news.jenny.workflow.PetFeederBeef;
@@ -12,15 +12,9 @@ import bbc.news.jenny.workflow.PetFeederHam;
 @RestController
 public class ResourceController {
 
-
-    private PetRepository petRepository = new PetRepository();
-    private OwnerRepository ownerRepository = new OwnerRepository();
-
-
-    //Load from database
-//    private List<Pet> listOfPets = petRepository.load();
-//    private List<Owner> listOfOwners = ownerRepository.load();
-
+    @Autowired
+    private PetRepository petRepository;
+    //private OwnerRepository ownerRepository = new OwnerRepository();
 
     //these are all gets
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
