@@ -1,11 +1,22 @@
 package bbc.news.jenny.repository;
 
 import bbc.news.jenny.domain.PetsApplication;
+import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.sql.DataSource;
+
 @Configuration
 public class RepositoryConfiguration {
+    static final String JDBC_DRIVER = "org.postgresql.Driver";
+    static final String DB_URL = "jdbc:postgresql://localhost/";
+    static final String EXISTING_DATABASE_NAME = "petsdb";
+
+    //  Database credentials
+    // Your database username and password
+    static final String USER = "roberj78";
+    static final String PASS = "roberj78";
 
     @Bean
     public PetRepository petRepository() {
@@ -13,15 +24,35 @@ public class RepositoryConfiguration {
     }
 
     @Bean
-    public PetExtractor petExtractor() { return new PetExtractor(); }
+    public PetExtractor petExtractor() {
+        return new PetExtractor();
+    }
 
     @Bean
-    public PetSaver petSaver() { return new PetSaver(); }
+    public PetSaver petSaver() {
+        return new PetSaver();
+    }
 
     @Bean
-    public PetDeleter petDeleter() {return  new PetDeleter(); }
+    public PetDeleter petDeleter() {
+        return new PetDeleter();
+    }
 
     @Bean
-    public DBQuery dbQuery() {return new DBQuery(); }
+    public DBQuery dbQuery() {
+        return new DBQuery();
+    }
+
+    @Bean
+    public DataSource dataSource() {
+        BasicDataSource basicDataSource = new BasicDataSource();
+        basicDataSource.setDriverClassName(JDBC_DRIVER);
+        basicDataSource.setUrl(DB_URL + EXISTING_DATABASE_NAME);
+        basicDataSource.setUsername(USER);
+        basicDataSource.setPassword(PASS);
+
+        return basicDataSource;
+    }
+
 
 }
