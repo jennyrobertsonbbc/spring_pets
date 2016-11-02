@@ -23,7 +23,7 @@ $(document).ready(function(){
             + valuesFromForm.petOwnerId + "/"
             + valuesFromForm.petName + "/"
             + valuesFromForm.petAge + "/"
-            + valuesFromForm.petHunger + "/"
+            + valuesFromForm.petHealth + "/"
             + valuesFromForm.petTypeId
             ,function(data) {
                 //with the json returned, add a new pet
@@ -33,14 +33,22 @@ $(document).ready(function(){
 
         //when delete button clicked
         $("#contents").on("click", "button.delete_button", function(){
-            var petNameToDelete = $(this).parent().parent().find('.petName').html();
-            console.log(petNameToDelete);
+            var petName = $(this).parent().parent().find('.petName').html();
+            console.log(petName);
             $(this).parent().parent().remove();
 
-            $.get("http://localhost:8080/pets/"+ petNameToDelete + "/delete/");
+            $.get("http://localhost:8080/pets/"+ petName + "/delete/");
 
     });
-
+//        //when feed button clicked
+//        $("#contents").on("click", "button.feed_button", function(){
+//            var petName = $(this).parent().parent().find('.petName').html();
+//            console.log(petName);
+//            $(this).parent().parent().remove();
+//
+//            $.get("http://localhost:8080/pets/" + petName + "/feed/1/beef");
+//
+//    });
 });
 
 function addNewPet(pet){
@@ -74,7 +82,7 @@ function addNewPet(pet){
 
         '<div class="petColumnRight">'+
         '<span class="petOwner">Owned by ' + pet.ownerId + '</span><br>'+
-                // '<span class="petHunger">Hunger: ' + pet.hunger + '</span><br>'+
+                // '<span class="petHealth">health: ' + pet.health + '</span><br>'+
                 '<span class="petId">Id: ' + pet.petId +'</span>'+
 
                 '</div>'+
@@ -83,10 +91,10 @@ function addNewPet(pet){
                 '<button class="feed_button">Feed</button>'+
                 '<button class="delete_button">X</button>'+
 
-                '<div class="petHungerSlider">'+
-                '<div class="petHungerSliderHearts"></div>'+
+                '<div class="petHealthSlider">'+
+                '<div class="petHealthSliderHearts"></div>'+
 
-                '<div class="petHungerSliderInner" style="width:'+ pet.hunger + '%"></div>'+
+                '<div class="petHealthSliderInner" style="width:'+ pet.health + '%"></div>'+
 
                 '</div>'+
 

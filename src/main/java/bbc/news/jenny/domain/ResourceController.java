@@ -47,9 +47,9 @@ public class ResourceController {
     }
 
     //todo Make it so you can say the word for the animal instead of the number
-    @RequestMapping(value = "pets/new/{ownerId}/{name}/{age}/{hunger}/{petTypeId}", method = RequestMethod.GET)
+    @RequestMapping(value = "pets/new/{ownerId}/{name}/{age}/{health}/{petTypeId}", method = RequestMethod.GET)
     public Pet makeNewPet(@PathVariable Integer ownerId, @PathVariable String name, @PathVariable Integer age,
-                          @PathVariable Integer hunger, @PathVariable Integer petTypeId) {
+                          @PathVariable Integer health, @PathVariable Integer petTypeId) {
 
         List<Pet> listOfPets = petRepository.load();
 
@@ -57,16 +57,16 @@ public class ResourceController {
 
         switch (petTypeId) {
             case 1:
-                petToAdd = new GuineaPig(ownerId, name, age, hunger, petTypeId);
+                petToAdd = new GuineaPig(ownerId, name, age, health, petTypeId);
                 break;
             case 2:
-                petToAdd = new Cat(ownerId, name, age, hunger, petTypeId, 5);
+                petToAdd = new Cat(ownerId, name, age, health, petTypeId, 5);
                 break;
             case 3:
-                petToAdd = new Pig(ownerId, name, age, hunger, petTypeId);
+                petToAdd = new Pig(ownerId, name, age, health, petTypeId);
                 break;
             case 4:
-                petToAdd = new Dog(ownerId, name, age, hunger, petTypeId, true);
+                petToAdd = new Dog(ownerId, name, age, health, petTypeId, true);
                 break;
         }
         if(petToAdd == null) return null;

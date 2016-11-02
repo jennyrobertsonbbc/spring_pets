@@ -28,22 +28,22 @@ public class PetExtractor {
                 Integer ownerId = resultSet.getInt("owner_id");
                 String petName = resultSet.getString("pet_name");
                 Integer petAge = resultSet.getInt("pet_age");
-                Integer petHunger = resultSet.getInt("pet_hunger");
+                Integer petHealth = resultSet.getInt("pet_health");
                 Integer petTypeId = resultSet.getInt("pet_type_id");
 
 
                 switch (petTypeId) {
                     case 1://guineapig
-                        petList.add(new GuineaPig(petId, ownerId, petName, petAge, petHunger, petTypeId));
+                        petList.add(new GuineaPig(petId, ownerId, petName, petAge, petHealth, petTypeId));
                         break;
                     case 2://cat
-                        petList.add(new Cat(petId, ownerId, petName, petAge, petHunger, petTypeId, 100));
+                        petList.add(new Cat(petId, ownerId, petName, petAge, petHealth, petTypeId, 100));
                         break;
                     case 3://pig
-                        petList.add(new Pig(petId, ownerId, petName, petAge, petHunger, petTypeId));
+                        petList.add(new Pig(petId, ownerId, petName, petAge, petHealth, petTypeId));
                         break;
                     case 4://dog
-                        petList.add(new Dog(petId, ownerId, petName, petAge, petHunger, petTypeId, true));
+                        petList.add(new Dog(petId, ownerId, petName, petAge, petHealth, petTypeId, true));
                         break;
                 }
 

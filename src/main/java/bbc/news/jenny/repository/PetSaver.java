@@ -17,9 +17,9 @@ public class PetSaver {
 
             if (pet.getPetId() == null) {
                 query = String.format("INSERT into pets " +
-                                "(owner_id, pet_name ,pet_age,pet_hunger ,pet_type_id) " +
+                                "(owner_id, pet_name ,pet_age,pet_health ,pet_type_id) " +
                                 "VALUES('%d','%s','%d','%d','%d');",
-                        pet.getOwnerId(), pet.getName(), pet.getAge(), pet.getHunger(), pet.getPetTypeId()
+                        pet.getOwnerId(), pet.getName(), pet.getAge(), pet.getHealth(), pet.getPetTypeId()
                 );
                 System.out.println(query);
 
@@ -30,10 +30,10 @@ public class PetSaver {
                                 "owner_id = '%d'," +
                                 "pet_name = '%s'," +
                                 "pet_age = '%d'," +
-                                "pet_hunger = '%d'," +
+                                "pet_health = '%d'," +
                                 "pet_type_id  = '%d'" +
                                 " WHERE pet_id = '%d';",
-                        pet.getOwnerId(), pet.getName(), pet.getAge(), pet.getHunger(), pet.getPetTypeId(), pet.getPetId()
+                        pet.getOwnerId(), pet.getName(), pet.getAge(), pet.getHealth(), pet.getPetTypeId(), pet.getPetId()
                 );
                 //System.out.println(query);
 

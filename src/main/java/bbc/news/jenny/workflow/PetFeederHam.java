@@ -9,15 +9,15 @@ public class PetFeederHam implements PetFeeder {
     public String feed(Pet abstractPet, Integer amountOfFood) {
 
 
-        Integer newHunger = abstractPet.getHunger()- amountOfFood * 1;
+        Integer newhealth = abstractPet.getHealth() + amountOfFood * 1;
 
         return String.format("Feeding %s the %s %d slices of ham.\n", abstractPet.getName(), abstractPet.getClass().getSimpleName(), amountOfFood);
 //
-//        if(newHunger >= 0 && newHunger <= 100) {
+//        if(newhealth >= 0 && newhealth <= 100) {
 //
-//            abstractPet.setHunger(newHunger);
+//            abstractPet.sethealth(newhealth);
 //        }
-//        else if(newHunger >= 100){
+//        else if(newhealth >= 100){
 //            System.out.printf("%s is too full to eat that!\n", abstractPet.getName());
 //        }
 

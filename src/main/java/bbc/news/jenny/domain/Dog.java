@@ -7,13 +7,13 @@ public class Dog extends AbstractPet {
     //only we can do it
     private boolean goodDog;
 
-    public Dog(Integer petId, Integer ownerId, String name, Integer age, Integer hunger, Integer petTypeId, boolean goodDog) {
-        super(petId, ownerId, name, age, hunger, petTypeId);
+    public Dog(Integer petId, Integer ownerId, String name, Integer age, Integer health, Integer petTypeId, boolean goodDog) {
+        super(petId, ownerId, name, age, health, petTypeId);
         this.goodDog = goodDog;
     }
 
-    public Dog(Integer ownerId, String name, Integer age, Integer hunger, Integer petTypeId, boolean goodDog) {
-        super(ownerId, name, age, hunger, petTypeId);
+    public Dog(Integer ownerId, String name, Integer age, Integer health, Integer petTypeId, boolean goodDog) {
+        super(ownerId, name, age, health, petTypeId);
         this.goodDog = goodDog;
     }
 

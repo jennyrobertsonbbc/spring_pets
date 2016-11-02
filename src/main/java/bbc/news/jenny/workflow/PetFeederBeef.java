@@ -9,16 +9,16 @@ public class PetFeederBeef implements PetFeeder {
     public String feed(Pet abstractPet, Integer amountOfFood) {
 
 
-        Integer newHunger = abstractPet.getHunger() - amountOfFood * 2;
+        Integer newhealth = abstractPet.getHealth() + amountOfFood * 2;
 
 
-        if (newHunger >= 0 && newHunger <= 100) {
+        if (newhealth >= 0 && newhealth <= 100) {
 
 
-            abstractPet.setHunger(newHunger);
+            abstractPet.sethealth(newhealth);
 
             return String.format("Feeding %s the %s %d chunks of beef.\n", abstractPet.getName(), abstractPet.getClass().getSimpleName(), amountOfFood);
-        } else if (newHunger <= 100) {
+        } else if (newhealth <= 100) {
             return String.format("%s is too full to eat that!\n", abstractPet.getName());
         }
 

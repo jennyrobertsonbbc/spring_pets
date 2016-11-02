@@ -6,13 +6,13 @@ package bbc.news.jenny.domain;
 public class Cat extends AbstractPet {
     private Integer number_of_whiskers;
 
-    public Cat(Integer petId, Integer ownerId, String name, Integer age, Integer hunger, Integer petTypeId, Integer number_of_whiskers) {
-        super(petId, ownerId, name, age, hunger, petTypeId);
+    public Cat(Integer petId, Integer ownerId, String name, Integer age, Integer health, Integer petTypeId, Integer number_of_whiskers) {
+        super(petId, ownerId, name, age, health, petTypeId);
         this.number_of_whiskers = number_of_whiskers;
     }
 
-    public Cat(Integer ownerId, String name, Integer age, Integer hunger, Integer petTypeId, Integer number_of_whiskers) {
-        super(ownerId, name, age, hunger, petTypeId);
+    public Cat(Integer ownerId, String name, Integer age, Integer health, Integer petTypeId, Integer number_of_whiskers) {
+        super(ownerId, name, age, health, petTypeId);
         this.number_of_whiskers = number_of_whiskers;
     }
 

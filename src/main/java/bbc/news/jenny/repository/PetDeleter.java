@@ -15,10 +15,10 @@ public class PetDeleter {
 //                        "owner_id = '%d'," +
 //                        "pet_name = '%s'," +
 //                        "pet_age = '%d'," +
-//                        "pet_hunger = '%d'," +
+//                        "pet_health = '%d'," +
 //                        "pet_type_id  = '%d'" +
 //                        " WHERE pet_id = '%d';",
-//                pet.getOwnerId(), pet.getName(), pet.getAge(), pet.getHunger(), pet.getPetTypeId(), pet.getPetId()
+//                pet.getOwnerId(), pet.getName(), pet.getAge(), pet.getHealth(), pet.getPetTypeId(), pet.getPetId()
 //        );
 
 

@@ -5,9 +5,9 @@ package bbc.news.jenny.domain;
  */
 public interface Pet {
 
-    public Integer getHunger();
+    public Integer getHealth();
 
-    public void setHunger(Integer hunger);
+    public void sethealth(Integer health);
 
     public String getName();
 
