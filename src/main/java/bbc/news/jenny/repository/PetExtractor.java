@@ -15,8 +15,6 @@ import java.util.List;
 @Controller
 public class PetExtractor {
 
-//    @Autowired
-//    private DBQuery dbQuery;
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;

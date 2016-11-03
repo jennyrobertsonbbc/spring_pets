@@ -40,10 +40,6 @@ public class RepositoryConfiguration {
         return new PetDeleter();
     }
 
-    @Bean
-    public DBQuery dbQuery() {
-        return new DBQuery();
-    }
 
     @Bean
     public DataSource dataSource() {

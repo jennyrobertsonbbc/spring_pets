@@ -12,9 +12,6 @@ import java.util.List;
 @Repository
 public class PetSaver {
 
-//    @Autowired
-//    private DBQuery dbQuery;
-
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -38,10 +35,7 @@ public class PetSaver {
                 parameters.addValue("pet_health", pet.getHealth());
                 parameters.addValue("pet_type_id", pet.getPetTypeId());
 
-            }
-
-
-             else {
+            } else {
 
 
                 sql = "UPDATE pets SET " +
