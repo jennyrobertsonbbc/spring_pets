@@ -75,9 +75,9 @@ public class ResourceController {
     }
 
     @RequestMapping(value = "pets/{name}/feed/{amount}/{foodType}", method = RequestMethod.GET)
-    public String feedPet(@PathVariable String name, @PathVariable Integer amount, @PathVariable String foodType) {
+    public Integer feedPet(@PathVariable String name, @PathVariable Integer amount, @PathVariable String foodType) {
         List<Pet> listOfPets = petRepository.load();
-        String output;
+        Integer output;
         switch (foodType.toLowerCase()) {
             case "beef":
                 PetFeederBeef petFeederBeef = new PetFeederBeef();
@@ -88,10 +88,11 @@ public class ResourceController {
                 output = petFeederHam.feed(PetUtils.findPetFromListByName(listOfPets, name), amount);
                 break;
             default:
-                output = "";
+                output = null;
         }
         petRepository.save(listOfPets);
         return output;
+        //todo make the feeder return the new health and use that to set the css width
 
     }
 

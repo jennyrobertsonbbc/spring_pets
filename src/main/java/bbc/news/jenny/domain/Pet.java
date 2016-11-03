@@ -7,7 +7,7 @@ public interface Pet {
 
     public Integer getHealth();
 
-    public void sethealth(Integer health);
+    public void setHealth(Integer health);
 
     public String getName();
 

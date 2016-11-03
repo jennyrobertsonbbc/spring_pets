@@ -33,7 +33,7 @@ abstract class AbstractPet implements Pet{
         this.petTypeId = petTypeId;
     }
 
-    public void sethealth(Integer health) {
+    public void setHealth(Integer health) {
         this.health = health;
         System.out.printf("%s's health is now %d.\n\n",this.name,getHealth());
     }

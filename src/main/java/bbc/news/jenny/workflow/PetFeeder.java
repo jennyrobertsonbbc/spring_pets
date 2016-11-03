@@ -8,6 +8,6 @@ import bbc.news.jenny.domain.Pet;
  */
 public interface PetFeeder {
 
-    public String feed(Pet abstractPet, Integer amountOfFood);
+    public Integer feed(Pet abstractPet, Integer amountOfFood);
 
 }
