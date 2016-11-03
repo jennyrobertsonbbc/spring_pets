@@ -27,6 +27,7 @@ $(document).ready(function(){
             + valuesFromForm.petTypeId
             ,function(data) {
                 //with the json returned, add a new pet
+                console.log(data);
                 addNewPet(data);
         });
     });

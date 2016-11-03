@@ -1,11 +1,17 @@
 package bbc.news.jenny.repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.*;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+//@Component
 public class DBQuery {
+
 
     public ResultSet sendSelectQuery(String query) {
 

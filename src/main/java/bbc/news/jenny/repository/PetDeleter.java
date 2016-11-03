@@ -2,36 +2,28 @@ package bbc.news.jenny.repository;
 
 import bbc.news.jenny.domain.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Controller;
+
 
 @Controller
 public class PetDeleter {
+
     @Autowired
-    DBQuery dbQuery;
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public void delete(Pet pet) {
 
+        String sql = "DELETE FROM pets WHERE pet_id = :petId;";
 
-        String query = "";
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
 
-//        query = String.format("UPDATE pets SET " +
-//                        "owner_id = '%d'," +
-//                        "pet_name = '%s'," +
-//                        "pet_age = '%d'," +
-//                        "pet_health = '%d'," +
-//                        "pet_type_id  = '%d'" +
-//                        " WHERE pet_id = '%d';",
-//                pet.getOwnerId(), pet.getName(), pet.getAge(), pet.getHealth(), pet.getPetTypeId(), pet.getPetId()
-//        );
+        parameters.addValue("petId", pet.getPetId());
 
+        int numberDeleted = namedParameterJdbcTemplate.update(sql, parameters);
 
-        query = String.format("DELETE FROM pets WHERE pet_id = '%d';", pet.getPetId());
-        //System.out.println(query);
-
-        dbQuery.sendUpdateQuery(query);
-
-
-        System.out.println("Pet deleted");
+        System.out.println("Pets deleted = " + numberDeleted);
     }
 
 }

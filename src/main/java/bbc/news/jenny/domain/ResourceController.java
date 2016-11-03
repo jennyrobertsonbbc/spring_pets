@@ -14,7 +14,7 @@ public class ResourceController {
 
     @Autowired
     private PetRepository petRepository;
-    //private OwnerRepository ownerRepository = new OwnerRepository();
+
 
     //these are all gets
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
@@ -69,7 +69,9 @@ public class ResourceController {
 
         petRepository.save(listOfPets);
 
-        return petToAdd;
+        //must be loaded from database in order to display newly created petId
+        listOfPets = petRepository.load();
+        return findPetFromListByName(listOfPets,petToAdd.getName());
     }
 
     @RequestMapping(value = "pets/{name}/feed/{amount}/{foodType}", method = RequestMethod.GET)
@@ -118,17 +120,17 @@ public class ResourceController {
         return cheese;
     }
 
-//    private Pet findPetFromListByName(List<Pet> listOfPets, String petName) {
-//        System.out.println("pet name from URL: " + petName);
-//        for (Pet pet : listOfPets) {
-//
-//            if (pet.getName().equals(petName)) {
-//                return pet;
-//
-//            }
-//        }
-//        return null;
-//    }
+    private Pet findPetFromListByName(List<Pet> listOfPets, String petName) {
+        System.out.println("pet name from URL: " + petName);
+        for (Pet pet : listOfPets) {
+
+            if (pet.getName().equals(petName)) {
+                return pet;
+
+            }
+        }
+        return null;
+    }
 
 //    //todo Make this work from database, but then the extractor will still be using a case statement so whats the point
 //    public String getTypeNameFromTypeId(Integer petTypeId){
