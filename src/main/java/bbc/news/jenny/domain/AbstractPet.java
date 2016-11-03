@@ -10,30 +10,32 @@ abstract class AbstractPet implements Pet{
     private Integer ownerId;
     private String name;
     private Integer age;
-    private Integer hunger;
+    private Integer health;
     private Integer petTypeId;
 
 
-    public AbstractPet(Integer petId, Integer ownerId, String name, Integer age, Integer hunger, Integer petTypeId) {
+    public AbstractPet(Integer petId, Integer ownerId, String name, Integer age, Integer health, Integer petTypeId) {
         this.petId = petId;
         this.ownerId = ownerId;
         this.name = name;
         this.age = age;
-        this.hunger = hunger;
+        this.health = health;
         this.petTypeId = petTypeId;
+
+
     }
 
-    public AbstractPet(Integer ownerId, String name, Integer age, Integer hunger, Integer petTypeId) {
+    public AbstractPet(Integer ownerId, String name, Integer age, Integer health, Integer petTypeId) {
         this.ownerId = ownerId;
         this.name = name;
         this.age = age;
-        this.hunger = hunger;
+        this.health = health;
         this.petTypeId = petTypeId;
     }
 
-    public void setHunger(Integer hunger) {
-        this.hunger = hunger;
-        System.out.printf("%s's hunger is now %d.\n\n",this.name,getHunger());
+    public void setHealth(Integer health) {
+        this.health = health;
+        System.out.printf("%s's health is now %d.\n\n",this.name,getHealth());
     }
 
     public AbstractPet(){}
@@ -71,8 +73,8 @@ abstract class AbstractPet implements Pet{
         this.age = age;
     }
 
-    public Integer getHunger() {
-        return hunger;
+    public Integer getHealth() {
+        return health;
     }
 
     public Integer getPetTypeId() {
@@ -90,7 +92,7 @@ abstract class AbstractPet implements Pet{
                 ", ownerId=" + ownerId +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-                ", hunger=" + hunger +
+                ", health=" + health +
                 ", petTypeId=" + petTypeId +
                 '}';
     }
@@ -106,7 +108,7 @@ abstract class AbstractPet implements Pet{
         if (ownerId != null ? !ownerId.equals(that.ownerId) : that.ownerId != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (age != null ? !age.equals(that.age) : that.age != null) return false;
-        if (hunger != null ? !hunger.equals(that.hunger) : that.hunger != null) return false;
+        if (health != null ? !health.equals(that.health) : that.health != null) return false;
         return petTypeId != null ? petTypeId.equals(that.petTypeId) : that.petTypeId == null;
 
     }

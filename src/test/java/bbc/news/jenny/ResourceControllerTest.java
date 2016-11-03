@@ -2,9 +2,8 @@ package bbc.news.jenny;
 
 import bbc.news.jenny.domain.*;
 import org.junit.Test;
-import repository.PetRepository;
+import bbc.news.jenny.repository.PetRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;

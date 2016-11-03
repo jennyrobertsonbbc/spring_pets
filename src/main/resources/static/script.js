@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function() {
 
     //load in all the pets from database and display
     $.get("http://localhost:8080/pets", function(data) {
@@ -8,7 +8,7 @@ $(document).ready(function(){
     });
 
     //when form submitted
-    $('#form').on('submit', function(e){
+    $('#form').on('submit', function(e) {
         e.preventDefault();
 
         //make an array
@@ -20,67 +20,100 @@ $(document).ready(function(){
 
         //get request of the url to make a new pet
         $.get("http://localhost:8080/pets/new/" +
-            + valuesFromForm.petOwnerId + "/"
-            + valuesFromForm.petName + "/"
-            + valuesFromForm.petAge + "/"
-            + valuesFromForm.petHunger + "/"
-            + valuesFromForm.petTypeId
-            ,function(data) {
+            +valuesFromForm.petOwnerId + "/" +
+            valuesFromForm.petName + "/" +
+            valuesFromForm.petAge + "/" +
+            valuesFromForm.petHealth + "/" +
+            valuesFromForm.petTypeId,
+            function(data) {
                 //with the json returned, add a new pet
+                console.log(data);
                 addNewPet(data);
+            });
+    });
+
+    //when delete button clicked
+    $("#contents").on("click", "button.delete_button", function() {
+        var petName = $(this).parent().parent().find('.petName').html();
+        console.log(petName);
+        $(this).parent().parent().remove();
+
+        $.get("http://localhost:8080/pets/" + petName + "/delete/");
+
+    });
+    //when feed button clicked
+    $("#contents").on("click", "button.feed_button", function() {
+        var newHealth;
+        var petName = $(this).parent().parent().find('.petName').html();
+        var petHealthSlider = $(this).parent().parent().find(".petHealthSliderInner");
+
+        //do the thing
+        $.get("http://localhost:8080/pets/" + petName + "/feed/1/beef", function(data) {
+            //with the json returned..
+
+
+            newHealth = data;
+            console.log("newHealth: " + newHealth);
+
+
+            petHealthSlider.css("width", newHealth + "%");
+
         });
+
+
+
+
     });
 });
 
-function addNewPet(pet){
+function addNewPet(pet) {
 
-    switch (pet.petTypeId){
+    switch (pet.petTypeId) {
         case 1:
-        imageSrc = "images/guineapig.png";
-        break;
+            imageSrc = "images/guineapig.png";
+            break;
         case 2:
-        imageSrc = "images/cat.png";
-        break;
+            imageSrc = "images/cat.png";
+            break;
         case 3:
-        imageSrc = "images/pig.png";
-        break;
+            imageSrc = "images/pig.png";
+            break;
         case 4:
-        imageSrc = "images/dog.png";
-        break;
+            imageSrc = "images/dog.png";
+            break;
     }
 
     $("#contents").prepend(
-        '<div class="showPet">'+
+        '<div class="showPet">' +
 
-        '<div class="petColumnLeft">'+
-        '<img class="petImage" src="'+ imageSrc +'"/>'+
-        '</div>'+
+        '<div class="petColumnLeft">' +
+        '<img class="petImage" src="' + imageSrc + '"/>' +
+        '</div>' +
 
-        '<div class="petColumnMiddle">'+
-        '<h2 class="petName">' + pet.name + '</h2>'+
-        '<span class="petAge">' + pet.age + ' years old</span>'+
-        '</div>'+
+        '<div class="petColumnMiddle">' +
+        '<h2 class="petName">' + pet.name + '</h2>' +
+        '<span class="petAge">' + pet.age + ' years old</span>' +
+        '</div>' +
 
-        '<div class="petColumnRight">'+
-        '<span class="petOwner">Owned by ' + pet.ownerId + '</span><br>'+
-                // '<span class="petHunger">Hunger: ' + pet.hunger + '</span><br>'+
-                '<span class="petId">Id: ' + pet.petId +'</span>'+
+        '<div class="petColumnRight">' +
+        '<span class="petOwner">Owned by ' + pet.ownerId + '</span><br>' +
+        // '<span class="petHealth">health: ' + pet.health + '</span><br>'+
+        '<span class="petId">Id: ' + pet.petId + '</span>' +
 
-                '</div>'+
+        '</div>' +
 
-                '<div class="petRowBottom">'+
-                '<button>Feed</button>'+
+        '<div class="petRowBottom">' +
+        '<button class="feed_button">Feed</button>' +
+        '<button class="delete_button">X</button>' +
 
-                '<div class="petHungerSlider">'+
-                '<div class="petHungerSliderHearts"></div>'+
+        '<div class="petHealthSlider">' +
+        '<div class="petHealthSliderHearts"></div>' +
 
-                '<div class="petHungerSliderInner" style="width:'+ pet.hunger + '%"></div>'+
+        '<div class="petHealthSliderInner" style="width:' + pet.health + '%"></div>' +
 
-                '</div>'+
+        '</div>' +
 
-                ' </div>'+
+        ' </div>' +
 
-                '</div><!-- show pet -->');
+        '</div><!-- show pet -->');
 }
-
-

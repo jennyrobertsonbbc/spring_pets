@@ -41,8 +41,6 @@ body{
 .petName{
 	size: 10px;
 }
-
-
 .petColumnLeft, .petColumnMiddle, .petColumnRight{
 	width: 33.33%;
 	height: 70%;
@@ -66,7 +64,7 @@ body{
 	background-color: #b7c6ce;
 	border-radius: 10px;
 }
-button{
+.feed_button {
 	display: block;
 	float: left;
 	padding: 10px;
@@ -75,12 +73,20 @@ button{
 	height: 30px;
 	font-size: 13px;
 }
+.delete_button {
+ 	display: block;
+ 	float: left;
+ 	padding: 5px;
+ 	margin: 5px;
+ 	font-size: 13px;
+ 	float: left;
+ }
 form{
 	clear:both;
 }
 
 /*Slider*/
-.petHungerSlider{
+.petHealthSlider{
 	background-color: white;
 	width: 180px;
 	height: 28px;
@@ -91,15 +97,15 @@ form{
 	border-radius: 5px;
 }
 
-.petHungerSliderInner{
-	background-color: orange;
+.petHealthSliderInner{
+	background-color: #e08bbb;
 	height: 30px;
 	z-index: 3;
 	
 
 }
 
-.petHungerSliderHearts{
+.petHealthSliderHearts{
 	height: 30px;
 	background-image: url("images/pixelheart.png");
 	background-size: 30px 30px;

@@ -1,25 +1,19 @@
 package bbc.news.jenny.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import repository.OwnerRepository;
-import repository.PetRepository;
-import workflow.PetFeederBeef;
-import workflow.PetFeederHam;
+import bbc.news.jenny.repository.PetRepository;
+import bbc.news.jenny.utils.PetUtils;
+import bbc.news.jenny.workflow.PetFeederBeef;
+import bbc.news.jenny.workflow.PetFeederHam;
 
 @RestController
 public class ResourceController {
 
-
-    private PetRepository petRepository = new PetRepository();
-    private OwnerRepository ownerRepository = new OwnerRepository();
-
-
-    //Load from database
-    private List<Pet> listOfPets = petRepository.load();
-    private List<Owner> listOfOwners = ownerRepository.load();
+    @Autowired
+    private PetRepository petRepository;
 
 
     //these are all gets
@@ -35,69 +29,86 @@ public class ResourceController {
 
     @RequestMapping(value = "/pets", method = RequestMethod.GET)
     public List<Pet> returnListOfPets() {
-        listOfPets = petRepository.load();
-        return listOfPets;
+        return petRepository.load();
     }
 
     //TODO make Mr. Pompadoor work with this:
 
     @RequestMapping(value = "pets/{name}", method = RequestMethod.GET)
     public Pet returnPetByName(@PathVariable String name) {
-        listOfPets = petRepository.load();
-        return findPetFromListByName(listOfPets,name);
+        List<Pet> listOfPets = petRepository.load();
+        return PetUtils.findPetFromListByName(listOfPets, name);
     }
 
     //todo Make it so you can say the word for the animal instead of the number
-    @RequestMapping(value = "pets/new/{ownerId}/{name}/{age}/{hunger}/{petTypeId}", method = RequestMethod.GET)
+    @RequestMapping(value = "pets/new/{ownerId}/{name}/{age}/{health}/{petTypeId}", method = RequestMethod.GET)
     public Pet makeNewPet(@PathVariable Integer ownerId, @PathVariable String name, @PathVariable Integer age,
-                          @PathVariable Integer hunger, @PathVariable Integer petTypeId) {
+                          @PathVariable Integer health, @PathVariable Integer petTypeId) {
 
-        listOfPets = petRepository.load();
+        List<Pet> listOfPets = petRepository.load();
+
+        AbstractPet petToAdd = null;
 
         switch (petTypeId) {
             case 1:
-                listOfPets.add(new GuineaPig(ownerId, name, age, hunger, petTypeId));
+                petToAdd = new GuineaPig(ownerId, name, age, health, petTypeId);
                 break;
             case 2:
-                listOfPets.add(new Cat(ownerId, name, age, hunger, petTypeId, 5));
+                petToAdd = new Cat(ownerId, name, age, health, petTypeId, 5);
                 break;
             case 3:
-                listOfPets.add(new Pig(ownerId, name, age, hunger, petTypeId));
+                petToAdd = new Pig(ownerId, name, age, health, petTypeId);
                 break;
             case 4:
-                listOfPets.add(new Dog(ownerId, name, age, hunger, petTypeId, true));
+                petToAdd = new Dog(ownerId, name, age, health, petTypeId, true);
                 break;
         }
+        if(petToAdd == null) return null;
+
+        listOfPets.add(petToAdd);
 
         petRepository.save(listOfPets);
-        listOfPets = petRepository.load();
 
-        return listOfPets.get(listOfPets.size() - 1);
+        //must be loaded from database in order to display newly created petId
+        listOfPets = petRepository.load();
+        return findPetFromListByName(listOfPets,petToAdd.getName());
     }
 
     @RequestMapping(value = "pets/{name}/feed/{amount}/{foodType}", method = RequestMethod.GET)
-    public String feedPet(@PathVariable String name, @PathVariable Integer amount, @PathVariable String foodType) {
-        listOfPets = petRepository.load();
-        String output;
-        switch (foodType) {
+    public Integer feedPet(@PathVariable String name, @PathVariable Integer amount, @PathVariable String foodType) {
+        List<Pet> listOfPets = petRepository.load();
+        Integer output;
+        switch (foodType.toLowerCase()) {
             case "beef":
-            case "Beef":
                 PetFeederBeef petFeederBeef = new PetFeederBeef();
-                output = petFeederBeef.feed(findPetFromListByName(listOfPets,name), amount);
+                output = petFeederBeef.feed(PetUtils.findPetFromListByName(listOfPets, name), amount);
                 break;
             case "ham":
-            case "Ham":
                 PetFeederHam petFeederHam = new PetFeederHam();
-                output = petFeederHam.feed(findPetFromListByName(listOfPets,name), amount);
+                output = petFeederHam.feed(PetUtils.findPetFromListByName(listOfPets, name), amount);
                 break;
             default:
-                output = "";
+                output = null;
         }
         petRepository.save(listOfPets);
         return output;
+        //todo make the feeder return the new health and use that to set the css width
 
     }
 
+    @RequestMapping(value = "pets/{name}/delete", method = RequestMethod.GET)
+    public List<Pet> deletePet(@PathVariable String name) {
+        List<Pet> listOfPets = petRepository.load();
+
+        Pet pet = PetUtils.findPetFromListByName(listOfPets, name);
+
+        petRepository.delete(pet);
+        listOfPets = petRepository.load();
+
+
+        return listOfPets;
+
+    }
 
     //***POST
     @RequestMapping(value = "/test", method = RequestMethod.POST)
