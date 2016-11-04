@@ -97,6 +97,13 @@ public class ResourceController {
 
     }
 
+    @RequestMapping(value = "pets/search/{queryString}", method = RequestMethod.GET)
+    public List<Pet> searchForPet(@PathVariable String queryString) {
+        List<Pet> listOfPets = petRepository.load();
+
+        return PetUtils.findPetFromListByPartialName(listOfPets, queryString);
+
+    }
     //***POST
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     public String displayPetFromBody(@RequestBody Pet pet) {

@@ -36,5 +36,11 @@ public class PetRepository implements Repository<Pet> {
 
     }
 
+    public Integer select(String queryString){
+        Integer petId = 56;
+
+        return petId;
+    }
+
 
 }
