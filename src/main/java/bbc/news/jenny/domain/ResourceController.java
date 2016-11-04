@@ -14,6 +14,10 @@ public class ResourceController {
 
     @Autowired
     private PetRepository petRepository;
+    @Autowired
+    private PetFeederBeef petFeederBeef;
+    @Autowired
+    private PetFeederHam petFeederHam;
 
     @RequestMapping(value = "/pets", method = RequestMethod.GET)
     public List<Pet> returnListOfPets() {
@@ -66,11 +70,9 @@ public class ResourceController {
         Integer output;
         switch (foodType.toLowerCase()) {
             case "beef":
-                PetFeederBeef petFeederBeef = new PetFeederBeef();
                 output = petFeederBeef.feed(PetUtils.findPetFromListByName(listOfPets, name), amount);
                 break;
             case "ham":
-                PetFeederHam petFeederHam = new PetFeederHam();
                 output = petFeederHam.feed(PetUtils.findPetFromListByName(listOfPets, name), amount);
                 break;
             default:
