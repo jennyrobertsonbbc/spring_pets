@@ -14,10 +14,10 @@ public class ResourceController {
 
     @Autowired
     private PetRepository petRepository;
-    @Autowired
-    private PetFeederBeef petFeederBeef;
-    @Autowired
-    private PetFeederHam petFeederHam;
+//    @Autowired
+//    private PetFeederBeef petFeederBeef;
+//    @Autowired
+//    private PetFeederHam petFeederHam;
 
     @RequestMapping(value = "/pets", method = RequestMethod.GET)
     public List<Pet> returnListOfPets() {
@@ -30,7 +30,6 @@ public class ResourceController {
         return PetUtils.findPetFromListByName(listOfPets, name);
     }
 
-    //todo Make it so you can say the word for the animal instead of the number
     @RequestMapping(value = "pets/new/{ownerId}/{name}/{age}/{health}/{petTypeId}", method = RequestMethod.GET)
     public Pet makeNewPet(@PathVariable Integer ownerId, @PathVariable String name, @PathVariable Integer age,
                           @PathVariable Integer health, @PathVariable Integer petTypeId) {
@@ -70,9 +69,11 @@ public class ResourceController {
         Integer output;
         switch (foodType.toLowerCase()) {
             case "beef":
+                PetFeederBeef petFeederBeef = new PetFeederBeef();
                 output = petFeederBeef.feed(PetUtils.findPetFromListByName(listOfPets, name), amount);
                 break;
             case "ham":
+                PetFeederHam petFeederHam = new PetFeederHam();
                 output = petFeederHam.feed(PetUtils.findPetFromListByName(listOfPets, name), amount);
                 break;
             default:
@@ -108,22 +109,6 @@ public class ResourceController {
     }
 
 
-//    //todo Make this work from database, but then the extractor will still be using a case statement so whats the point
-//    public String getTypeNameFromTypeId(Integer petTypeId){
-//        switch (petTypeId) {
-//            case 1://guineapig
-//                return "Guinea Pig";
-//            case 2://cat
-//                return "Cat";
-//            case 3://pig
-//                return "Pig";
-//            case 4://dog
-//                return "Dog";
-//            default:
-//                return null;
-//        }
-//
-//    }
 
 
 }

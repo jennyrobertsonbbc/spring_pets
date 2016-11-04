@@ -1,8 +1,5 @@
 package bbc.news.jenny.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
 abstract class AbstractPet implements Pet{
     private Integer petId;
     private Integer ownerId;

@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    console.log("hello {0}".format("test"));
+
     //load in all the pets from database and display
     $.get("http://localhost:8080/pets", function(data) {
         $.each(data, function(i, pet) {
@@ -81,8 +83,7 @@ function addNewPet(pet) {
             imageSrc = "images/dog.png";
             break;
     }
-
-    $("#contents").prepend(
+   $("#contents").prepend(
         '<div class="showPet">' +
 
         '<div class="petColumnLeft">' +
@@ -115,4 +116,17 @@ function addNewPet(pet) {
         ' </div>' +
 
         '</div><!-- show pet -->');
+
+
 }
+
+String.prototype.format = function()
+{
+   var content = this;
+   for (var i=0; i < arguments.length; i++)
+   {
+        var replacement = '{' + i + '}';
+        content = content.replace(replacement, arguments[i]);
+   }
+   return content;
+};

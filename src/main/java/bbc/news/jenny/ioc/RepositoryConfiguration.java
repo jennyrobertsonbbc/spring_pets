@@ -1,6 +1,5 @@
 package bbc.news.jenny.ioc;
 
-import bbc.news.jenny.domain.PetsApplication;
 import bbc.news.jenny.repository.PetDeleter;
 import bbc.news.jenny.repository.PetExtractor;
 import bbc.news.jenny.repository.PetRepository;
@@ -8,7 +7,6 @@ import bbc.news.jenny.repository.PetSaver;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
