@@ -67,9 +67,9 @@ body{
 .feed_button {
 	display: block;
 	float: left;
-	padding: 10px;
-	width: 100px;
-	margin: 5px;
+
+	width: 50px;
+	margin: 2px;
 	height: 30px;
 	font-size: 13px;
 }

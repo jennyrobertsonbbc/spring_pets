@@ -15,24 +15,10 @@ public class ResourceController {
     @Autowired
     private PetRepository petRepository;
 
-
-    //these are all gets
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String returnStringFromURL() {
-        return "hello";
-    }
-
-    @RequestMapping(value = "/hello/{forename}/{surname}", method = RequestMethod.GET)
-    public String returnStringFromURL2(@PathVariable String forename, @PathVariable String surname) {
-        return "hello" + forename + surname;
-    }
-
     @RequestMapping(value = "/pets", method = RequestMethod.GET)
     public List<Pet> returnListOfPets() {
         return petRepository.load();
     }
-
-    //TODO make Mr. Pompadoor work with this:
 
     @RequestMapping(value = "pets/{name}", method = RequestMethod.GET)
     public Pet returnPetByName(@PathVariable String name) {
@@ -92,8 +78,6 @@ public class ResourceController {
         }
         petRepository.save(listOfPets);
         return output;
-        //todo make the feeder return the new health and use that to set the css width
-
     }
 
     @RequestMapping(value = "pets/{name}/delete", method = RequestMethod.GET)
