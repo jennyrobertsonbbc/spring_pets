@@ -52,7 +52,7 @@ public class ResourceController {
                 petToAdd = new Dog(ownerId, name, age, health, petTypeId, true);
                 break;
         }
-        if(petToAdd == null) return null;
+        if (petToAdd == null) return null;
 
         listOfPets.add(petToAdd);
 
@@ -60,7 +60,7 @@ public class ResourceController {
 
         //must be loaded from database in order to display newly created petId
         listOfPets = petRepository.load();
-        return PetUtils.findPetFromListByName(listOfPets,petToAdd.getName());
+        return PetUtils.findPetFromListByName(listOfPets, petToAdd.getName());
     }
 
     @RequestMapping(value = "pets/{name}/feed/{amount}/{foodType}", method = RequestMethod.GET)
@@ -104,6 +104,7 @@ public class ResourceController {
         return PetUtils.findPetFromListByPartialName(listOfPets, queryString);
 
     }
+
     //***POST
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     public String displayPetFromBody(@RequestBody Pet pet) {
@@ -114,8 +115,6 @@ public class ResourceController {
     public String displayTextFromBody(@RequestBody String cheese) {
         return cheese;
     }
-
-
 
 
 }
