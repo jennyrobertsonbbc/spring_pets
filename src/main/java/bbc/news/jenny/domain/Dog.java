@@ -1,8 +1,6 @@
 package bbc.news.jenny.domain;
 
-/**
- * Created by roberj78 on 29/09/2016.
- */
+
 public class Dog extends AbstractPet {
     //only we can do it
     private boolean goodDog;

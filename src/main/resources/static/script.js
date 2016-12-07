@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    console.log("hello {0}".format("test"));
+
     //load in all the pets from database and display
     $.get("http://localhost:8080/pets", function(data) {
         $.each(data, function(i, pet) {
@@ -42,29 +44,28 @@ $(document).ready(function() {
 
     });
     //when feed button clicked
-    $("#contents").on("click", "button.feed_button", function() {
-        var newHealth;
-        var petName = $(this).parent().parent().find('.petName').html();
-        var petHealthSlider = $(this).parent().parent().find(".petHealthSliderInner");
-
-        //do the thing
-        $.get("http://localhost:8080/pets/" + petName + "/feed/1/beef", function(data) {
-            //with the json returned..
-
-
-            newHealth = data;
-            console.log("newHealth: " + newHealth);
-
-
-            petHealthSlider.css("width", newHealth + "%");
-
-        });
-
-
-
-
+    $("#contents").on("click", "button#ham_button", function() {
+        var buttonPressed = $(this);
+        feedPet(buttonPressed, "ham");
+    });
+    $("#contents").on("click", "button#beef_button", function() {
+        var buttonPressed = $(this);
+        feedPet(buttonPressed, "beef");
     });
 });
+
+function feedPet(buttonPressed, food) {
+    var newHealth;
+    var petName = buttonPressed.parent().parent().find('.petName').html();
+    var petHealthSlider = buttonPressed.parent().parent().find(".petHealthSliderInner");
+    //do the thing
+    $.get("http://localhost:8080/pets/" + petName + "/feed/1/" + food, function(data) {
+        newHealth = data;
+        console.log("newHealth: " + newHealth);
+        petHealthSlider.css("width", newHealth + "%");
+    });
+
+}
 
 function addNewPet(pet) {
 
@@ -82,8 +83,7 @@ function addNewPet(pet) {
             imageSrc = "images/dog.png";
             break;
     }
-
-    $("#contents").prepend(
+   $("#contents").prepend(
         '<div class="showPet">' +
 
         '<div class="petColumnLeft">' +
@@ -97,13 +97,13 @@ function addNewPet(pet) {
 
         '<div class="petColumnRight">' +
         '<span class="petOwner">Owned by ' + pet.ownerId + '</span><br>' +
-        // '<span class="petHealth">health: ' + pet.health + '</span><br>'+
         '<span class="petId">Id: ' + pet.petId + '</span>' +
 
         '</div>' +
 
         '<div class="petRowBottom">' +
-        '<button class="feed_button">Feed</button>' +
+		'<button class="feed_button" id="ham_button">Ham</button>' +
+		'<button class="feed_button" id="beef_button">Beef</button>' +
         '<button class="delete_button">X</button>' +
 
         '<div class="petHealthSlider">' +
@@ -116,4 +116,17 @@ function addNewPet(pet) {
         ' </div>' +
 
         '</div><!-- show pet -->');
+
+
 }
+
+String.prototype.format = function()
+{
+   var content = this;
+   for (var i=0; i < arguments.length; i++)
+   {
+        var replacement = '{' + i + '}';
+        content = content.replace(replacement, arguments[i]);
+   }
+   return content;
+};

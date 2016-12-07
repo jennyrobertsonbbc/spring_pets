@@ -1,10 +1,5 @@
 package bbc.news.jenny.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-/**
- * Created by roberj78 on 29/09/2016.
- */
 abstract class AbstractPet implements Pet{
     private Integer petId;
     private Integer ownerId;
@@ -12,7 +7,6 @@ abstract class AbstractPet implements Pet{
     private Integer age;
     private Integer health;
     private Integer petTypeId;
-
 
     public AbstractPet(Integer petId, Integer ownerId, String name, Integer age, Integer health, Integer petTypeId) {
         this.petId = petId;

@@ -4,9 +4,6 @@ import bbc.news.jenny.domain.Pet;
 
 import java.util.List;
 
-/**
- * Created by roberj78 on 02/11/2016.
- */
 public class PetUtils {
 
     public static Pet findPetFromListByName(final List<Pet> listOfPets, final String petName) {

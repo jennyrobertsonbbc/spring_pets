@@ -14,25 +14,15 @@ public class ResourceController {
 
     @Autowired
     private PetRepository petRepository;
-
-
-    //these are all gets
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String returnStringFromURL() {
-        return "hello";
-    }
-
-    @RequestMapping(value = "/hello/{forename}/{surname}", method = RequestMethod.GET)
-    public String returnStringFromURL2(@PathVariable String forename, @PathVariable String surname) {
-        return "hello" + forename + surname;
-    }
+//    @Autowired
+//    private PetFeederBeef petFeederBeef;
+//    @Autowired
+//    private PetFeederHam petFeederHam;
 
     @RequestMapping(value = "/pets", method = RequestMethod.GET)
     public List<Pet> returnListOfPets() {
         return petRepository.load();
     }
-
-    //TODO make Mr. Pompadoor work with this:
 
     @RequestMapping(value = "pets/{name}", method = RequestMethod.GET)
     public Pet returnPetByName(@PathVariable String name) {
@@ -40,7 +30,6 @@ public class ResourceController {
         return PetUtils.findPetFromListByName(listOfPets, name);
     }
 
-    //todo Make it so you can say the word for the animal instead of the number
     @RequestMapping(value = "pets/new/{ownerId}/{name}/{age}/{health}/{petTypeId}", method = RequestMethod.GET)
     public Pet makeNewPet(@PathVariable Integer ownerId, @PathVariable String name, @PathVariable Integer age,
                           @PathVariable Integer health, @PathVariable Integer petTypeId) {
@@ -71,7 +60,7 @@ public class ResourceController {
 
         //must be loaded from database in order to display newly created petId
         listOfPets = petRepository.load();
-        return findPetFromListByName(listOfPets,petToAdd.getName());
+        return PetUtils.findPetFromListByName(listOfPets,petToAdd.getName());
     }
 
     @RequestMapping(value = "pets/{name}/feed/{amount}/{foodType}", method = RequestMethod.GET)
@@ -92,8 +81,6 @@ public class ResourceController {
         }
         petRepository.save(listOfPets);
         return output;
-        //todo make the feeder return the new health and use that to set the css width
-
     }
 
     @RequestMapping(value = "pets/{name}/delete", method = RequestMethod.GET)
@@ -121,34 +108,7 @@ public class ResourceController {
         return cheese;
     }
 
-    private Pet findPetFromListByName(List<Pet> listOfPets, String petName) {
-        System.out.println("pet name from URL: " + petName);
-        for (Pet pet : listOfPets) {
 
-            if (pet.getName().equals(petName)) {
-                return pet;
-
-            }
-        }
-        return null;
-    }
-
-//    //todo Make this work from database, but then the extractor will still be using a case statement so whats the point
-//    public String getTypeNameFromTypeId(Integer petTypeId){
-//        switch (petTypeId) {
-//            case 1://guineapig
-//                return "Guinea Pig";
-//            case 2://cat
-//                return "Cat";
-//            case 3://pig
-//                return "Pig";
-//            case 4://dog
-//                return "Dog";
-//            default:
-//                return null;
-//        }
-//
-//    }
 
 
 }

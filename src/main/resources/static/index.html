@@ -32,10 +32,10 @@
 						</td>
 					<tr>
 						<td>Pet age:</td>
-						<td><input name="petAge"></td>
+						<td><input type="number" min = "0" max = "100" name="petAge"></td>
 					<tr>
 						<td>Pet health:</td>
-						 <td><input name= "petHealth" type="range" id="myRange" value="50"></td>
+						 <td><input name= "petHealth" type="range" id="myRange" min="1" max="100" value="50"></td>
 					</tr>
 					<tr>
 						<td>Pet owner:</td>
@@ -77,7 +77,8 @@
 			</div>
 
 			<div class="petRowBottom">
-				<button class="feed_button">Feed</button>
+				<button class="feed_button" id="ham_button">Ham</button>
+				<button class="feed_button" id="beef_button">Beef</button>
 				<button class="delete_button">x</button>
 
 

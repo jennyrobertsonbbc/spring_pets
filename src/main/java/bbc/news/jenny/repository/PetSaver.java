@@ -55,7 +55,6 @@ public class PetSaver {
                 parameters.addValue("pet_id", pet.getPetId());
 
             }
-            //dbQuery.sendUpdateQuery(sql);
             namedParameterJdbcTemplate.update(sql, parameters);
 
 
