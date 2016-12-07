@@ -2,12 +2,8 @@ $(document).ready(function() {
 
     console.log("hello {0}".format("test"));
 
-    //load in all the pets from database and display
-    $.get("http://localhost:8080/pets", function(data) {
-        $.each(data, function(i, pet) {
-            addNewPet(pet);
-        });
-    });
+    populateAllPets();
+
 
     //when form submitted
     $('#form').on('submit', function(e) {
@@ -52,6 +48,30 @@ $(document).ready(function() {
         var buttonPressed = $(this);
         feedPet(buttonPressed, "beef");
     });
+
+
+    $('#search').on('input', function(e) {
+        var queryString = $(this).val();
+
+        if (queryString.match(/[a-z]/i)) {
+            $.get("http://localhost:8080/pets/search/" + $(this).val(),
+                function(data) {
+                    removeAllPets();
+                    //with the json returned, add a new pet
+                    $.each(data, function(i, pet) {
+                        addNewPet(pet);
+                    });
+
+                });
+        }
+        else{
+            removeAllPets();
+            populateAllPets();
+        }
+    });
+
+
+
 });
 
 function feedPet(buttonPressed, food) {
@@ -83,7 +103,7 @@ function addNewPet(pet) {
             imageSrc = "images/dog.png";
             break;
     }
-   $("#contents").prepend(
+    $("#contents").prepend(
         '<div class="showPet">' +
 
         '<div class="petColumnLeft">' +
@@ -102,8 +122,8 @@ function addNewPet(pet) {
         '</div>' +
 
         '<div class="petRowBottom">' +
-		'<button class="feed_button" id="ham_button">Ham</button>' +
-		'<button class="feed_button" id="beef_button">Beef</button>' +
+        '<button class="feed_button" id="ham_button">Ham</button>' +
+        '<button class="feed_button" id="beef_button">Beef</button>' +
         '<button class="delete_button">X</button>' +
 
         '<div class="petHealthSlider">' +
@@ -120,13 +140,26 @@ function addNewPet(pet) {
 
 }
 
-String.prototype.format = function()
-{
-   var content = this;
-   for (var i=0; i < arguments.length; i++)
-   {
+function populateAllPets(){
+    //load in all the pets from database and display
+    $.get("http://localhost:8080/pets", function(data) {
+        $.each(data, function(i, pet) {
+            addNewPet(pet);
+        });
+    });
+
+}
+function removeAllPets(){
+$("#contents").empty();
+
+}
+
+
+String.prototype.format = function() {
+    var content = this;
+    for (var i = 0; i < arguments.length; i++) {
         var replacement = '{' + i + '}';
         content = content.replace(replacement, arguments[i]);
-   }
-   return content;
+    }
+    return content;
 };

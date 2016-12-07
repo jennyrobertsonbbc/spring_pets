@@ -8,6 +8,17 @@ body{
 	background-color:  #ffffcc;
 }
 
+.column_left{
+width: 50%;
+float:left;
+}
+
+.column_right{
+width: 50%;
+float: right;
+margin-top: 30px;
+
+}
 #header{
 	width: 100%;
 	clear: both;
@@ -118,5 +129,10 @@ form{
 
 }
 
-
+#search{
+    width: 500px;
+    height: 60px;
+    margin-top: 10px;
+    font-size: 30px;
+}
 

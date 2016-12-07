@@ -1,108 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="script.js"></script>
-	<meta charset="UTF-8">
-	<title>Pets in the database</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <meta charset="UTF-8">
+    <title>Pets in the database</title>
 </head>
 <body>
-	<div id ="container">
+<div id="container">
 
-		<div id="header">
-			<h1>Pets</h1>
-			<br>
+    <div id="header">
+        <div class="column_left">
+            <h1>Pets</h1>
+            <br>
 
-			<form id="form">
-				<table>
-					<tr>
-						<td>Pet name:</td>
-						<td> <input name="petName"></td>
-					</tr>
-					<tr>
-						<td>Pet type: </td>
-						<td>
-							<select name="petTypeId">
-								<option value="1">Guinea Pig</option>
-								<option value="2">Cat</option>
-								<option value="3">Pig</option>
-								<option value="4">Dog</option>
-							</select>
-						</td>
-					<tr>
-						<td>Pet age:</td>
-						<td><input type="number" min = "0" max = "100" name="petAge"></td>
-					<tr>
-						<td>Pet health:</td>
-						 <td><input name= "petHealth" type="range" id="myRange" min="1" max="100" value="50"></td>
-					</tr>
-					<tr>
-						<td>Pet owner:</td>
-						<td> <select name="petOwnerId">
-								<option value="3">Jenny</option>
-								<option value="4">Gareth</option>
-							</select>
+            <form id="form">
+                <table>
+                    <tr>
+                        <td>Pet name:</td>
+                        <td><input name="petName"></td>
+                    </tr>
+                    <tr>
+                        <td>Pet type:</td>
+                        <td>
+                            <select name="petTypeId">
+                                <option value="1">Guinea Pig</option>
+                                <option value="2">Cat</option>
+                                <option value="3">Pig</option>
+                                <option value="4">Dog</option>
+                            </select>
+                        </td>
+                    <tr>
+                        <td>Pet age:</td>
+                        <td><input type="number" min="0" max="100" name="petAge"></td>
+                    <tr>
+                        <td>Pet health:</td>
+                        <td><input name="petHealth" type="range" id="myRange" min="1" max="100" value="50"></td>
+                    </tr>
+                    <tr>
+                        <td>Pet owner:</td>
+                        <td><select name="petOwnerId">
+                            <option value="1">Jenny</option>
+                            <option value="2">Gareth</option>
+                        </select>
 
-						</td>
-					</tr>
-				</table>
+                        </td>
+                    </tr>
+                </table>
 
-			<input type="submit" id="submit" name="submit" value="Send">
+                <input type="submit" id="submit" name="submit" value="Send">
 
-		</form>
-
-	</div>
-
-
-	<div id="contents">
-
-		<div class="showPet">
-
-			<div class="petColumnLeft">
-
-				<img class="petImage" src="images/dog.png"/>
-			</div>
-
-			<div class="petColumnMiddle">
-				<h2 class="petName">Test</h2>
-				<span class="petAge">5 years old</span>
-			</div>
-
-			<div class="petColumnRight">
-				<span class="petOwner">Owned by Jenny</span><br>
-				<!-- <span class="petHealth">health: 45 </span><br> -->
-				<span class="petId">Id: -1 </span>
-
-			</div>
-
-			<div class="petRowBottom">
-				<button class="feed_button" id="ham_button">Ham</button>
-				<button class="feed_button" id="beef_button">Beef</button>
-				<button class="delete_button">x</button>
+            </form>
+        </div>
+        <div class="column_right">
+            <h2>Search by name</h2>
+            <input name="search" id="search">
+        </div>
+    </div>
 
 
-				<div class="petHealthSlider">
-					<div class="petHealthSliderHearts"></div>
+    <div id="contents">
 
-					<div class="petHealthSliderInner" style="width: 55%"></div>
+        <div class="showPet">
+
+            <div class="petColumnLeft">
+
+                <img class="petImage" src="images/dog.png"/>
+            </div>
+
+            <div class="petColumnMiddle">
+                <h2 class="petName">Test</h2>
+                <span class="petAge">5 years old</span>
+            </div>
+
+            <div class="petColumnRight">
+                <span class="petOwner">Owned by Jenny</span><br>
+                <!-- <span class="petHealth">health: 45 </span><br> -->
+                <span class="petId">Id: -1 </span>
+
+            </div>
+
+            <div class="petRowBottom">
+                <button class="feed_button" id="ham_button">Ham</button>
+                <button class="feed_button" id="beef_button">Beef</button>
+                <button class="delete_button">x</button>
 
 
+                <div class="petHealthSlider">
+                    <div class="petHealthSliderHearts"></div>
 
-				</div>
-
-			</div>
-
-		</div>
+                    <div class="petHealthSliderInner" style="width: 55%"></div>
 
 
+                </div>
 
-	</div>
+            </div>
+
+        </div>
 
 
-
-
-
+    </div>
 
 
 </div><!-- container -->
