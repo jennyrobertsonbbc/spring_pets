@@ -1,6 +1,7 @@
 package bbc.news.jenny.domain;
 
 import bbc.news.jenny.repository.PetRepository;
+import bbc.news.jenny.repository.PetTypeRepository;
 import bbc.news.jenny.utils.PetUtils;
 import bbc.news.jenny.workflow.PetFeederBeef;
 import bbc.news.jenny.workflow.PetFeederHam;
@@ -14,6 +15,8 @@ public class ResourceController {
 
     @Autowired
     private PetRepository petRepository;
+    @Autowired
+    private PetTypeRepository petTypeRepository;
 
     @RequestMapping(value = "/pets", method = RequestMethod.GET)
     public List<Pet> returnListOfPets() {
@@ -29,25 +32,22 @@ public class ResourceController {
     @RequestMapping(value = "pets/new/{ownerId}/{name}/{age}/{health}/{petTypeId}", method = RequestMethod.GET)
     public Pet makeNewPet(@PathVariable Integer ownerId, @PathVariable String name, @PathVariable Integer age,
                           @PathVariable Integer health, @PathVariable Integer petTypeId) {
-
         List<Pet> listOfPets = petRepository.load();
+        List<PetType> listOfPetTypes = petTypeRepository.load();
+        System.out.println("here:");
 
-        AbstractPet petToAdd = null;
+        System.out.println(listOfPetTypes.toString());
 
-        switch (petTypeId) {
-            case 1:
-                petToAdd = new GuineaPig(ownerId, name, age, health, petTypeId);
+        PetType petType = null;
+
+        for (PetType petTypeSearch : listOfPetTypes) {
+            if (petTypeSearch.getId() == petTypeId) {
+                petType = petTypeSearch;
                 break;
-            case 2:
-                petToAdd = new Cat(ownerId, name, age, health, petTypeId, 5);
-                break;
-            case 3:
-                petToAdd = new Pig(ownerId, name, age, health, petTypeId);
-                break;
-            case 4:
-                petToAdd = new Dog(ownerId, name, age, health, petTypeId, true);
-                break;
+            }
         }
+        Pet petToAdd = new Pet(ownerId, name, age, health, petType);
+
         if (petToAdd == null) return null;
 
         listOfPets.add(petToAdd);
@@ -100,6 +100,12 @@ public class ResourceController {
         return PetUtils.findPetFromListByPartialName(listOfPets, queryString);
 
     }
+
+    @RequestMapping(value = "pets/types", method = RequestMethod.GET)
+    public List<PetType> getPetTypes() {
+        return petTypeRepository.load();
+    }
+
 
     //***POST
     @RequestMapping(value = "/test", method = RequestMethod.POST)

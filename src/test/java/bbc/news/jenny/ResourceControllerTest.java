@@ -14,16 +14,16 @@ public class ResourceControllerTest {
 //    @Test
 //    public void returnPetByNameTest() {
 //
-//        List<Pet> listOfPets = petRepository.load();
-//        Pet pet = listOfPets.get(listOfPets.size()-1);
+//        List<PetInterfaceOld> listOfPets = petRepository.load();
+//        PetInterfaceOld pet = listOfPets.get(listOfPets.size()-1);
 //
 //        assertEquals(pet, resourceController.returnPetByName(pet.getName()));
 //    }
 
 //    @Test
 //    public void makeNewPetTest(){
-//        Pet expectedPet = new GuineaPig(4,"test pet name",3,45,1);
-//        Pet returnedPet = resourceController.makeNewPet(4,"test pet name",3,45,1);
+//        PetInterfaceOld expectedPet = new GuineaPig(4,"test pet name",3,45,1);
+//        PetInterfaceOld returnedPet = resourceController.makeNewPet(4,"test pet name",3,45,1);
 //
 //        assertEquals(expectedPet,returnedPet);
 //    }

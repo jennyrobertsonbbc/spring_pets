@@ -19,7 +19,6 @@ public class PetRepository implements Repository<Pet> {
         //Load in pets from database as a list
         List<Pet> listOfPets;
         listOfPets = petExtractor.extract();
-        System.out.println("Loading in from database");
         return listOfPets;
 
     }

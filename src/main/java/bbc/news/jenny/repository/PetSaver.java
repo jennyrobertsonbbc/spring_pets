@@ -4,7 +4,6 @@ import bbc.news.jenny.domain.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -33,7 +32,7 @@ public class PetSaver {
                 parameters.addValue("pet_name", pet.getName());
                 parameters.addValue("pet_age", pet.getAge());
                 parameters.addValue("pet_health", pet.getHealth());
-                parameters.addValue("pet_type_id", pet.getPetTypeId());
+                parameters.addValue("pet_type_id", pet.getPetType().getId());
 
             } else {
 
@@ -51,7 +50,7 @@ public class PetSaver {
                 parameters.addValue("pet_name", pet.getName());
                 parameters.addValue("pet_age", pet.getAge());
                 parameters.addValue("pet_health", pet.getHealth());
-                parameters.addValue("pet_type_id", pet.getPetTypeId());
+                parameters.addValue("pet_type_id", pet.getPetType().getId());
                 parameters.addValue("pet_id", pet.getPetId());
 
             }
