@@ -1,23 +1,19 @@
 package bbc.news.jenny.domain;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import bbc.news.jenny.repository.PetRepository;
 import bbc.news.jenny.utils.PetUtils;
 import bbc.news.jenny.workflow.PetFeederBeef;
 import bbc.news.jenny.workflow.PetFeederHam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class ResourceController {
 
     @Autowired
     private PetRepository petRepository;
-//    @Autowired
-//    private PetFeederBeef petFeederBeef;
-//    @Autowired
-//    private PetFeederHam petFeederHam;
 
     @RequestMapping(value = "/pets", method = RequestMethod.GET)
     public List<Pet> returnListOfPets() {

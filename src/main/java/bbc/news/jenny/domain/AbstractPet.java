@@ -15,8 +15,6 @@ abstract class AbstractPet implements Pet{
         this.age = age;
         this.health = health;
         this.petTypeId = petTypeId;
-
-
     }
 
     public AbstractPet(Integer ownerId, String name, Integer age, Integer health, Integer petTypeId) {
@@ -111,4 +109,6 @@ abstract class AbstractPet implements Pet{
     public int hashCode() {
         return 0;
     }
+
+
 }
