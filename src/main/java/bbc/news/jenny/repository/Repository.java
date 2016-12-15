@@ -7,7 +7,7 @@ interface Repository<T> {
 
     List<T> load();
 
-    void save(List<T> listOfObjects);
+    int save(T obj);
 
     void delete(T obj);
 }

@@ -5,15 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public class PetTypeSaver {
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public void save(List<PetType> listOfPetTypes) {
+    public void save(PetType petType) {
 //
 //
 //        String sql = "";

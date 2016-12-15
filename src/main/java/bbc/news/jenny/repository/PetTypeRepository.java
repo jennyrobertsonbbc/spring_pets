@@ -23,9 +23,10 @@ public class PetTypeRepository implements Repository<PetType> {
 
     }
 
-    public void save(List<PetType> listOfPetTypes) {
+    public int save(PetType petType) {
         System.out.println("Saving to database");
-        PetTypeSaver.save(listOfPetTypes);
+        PetTypeSaver.save(petType);
+        return 0;
 
     }
 

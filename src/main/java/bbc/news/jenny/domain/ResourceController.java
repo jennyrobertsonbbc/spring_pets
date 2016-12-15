@@ -34,9 +34,7 @@ public class ResourceController {
                           @PathVariable Integer health, @PathVariable Integer petTypeId) {
         List<Pet> listOfPets = petRepository.load();
         List<PetType> listOfPetTypes = petTypeRepository.load();
-        System.out.println("here:");
 
-        System.out.println(listOfPetTypes.toString());
 
         PetType petType = null;
 
@@ -48,15 +46,12 @@ public class ResourceController {
         }
         Pet petToAdd = new Pet(ownerId, name, age, health, petType);
 
-        if (petToAdd == null) return null;
+        int newPetKey = petRepository.save(petToAdd);
+        petToAdd.setPetId(newPetKey);
 
         listOfPets.add(petToAdd);
 
-        petRepository.save(listOfPets);
-
-        //must be loaded from database in order to display newly created petId
-        listOfPets = petRepository.load();
-        return PetUtils.findPetFromListByName(listOfPets, petToAdd.getName());
+        return petToAdd;
     }
 
     @RequestMapping(value = "pets/{name}/feed/{amount}/{foodType}", method = RequestMethod.GET)
@@ -75,7 +70,8 @@ public class ResourceController {
             default:
                 output = null;
         }
-        petRepository.save(listOfPets);
+        //todo: fix to use id, using a map
+        petRepository.save(PetUtils.findPetFromListByName(listOfPets, name));
         return output;
     }
 
