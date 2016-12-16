@@ -4,6 +4,8 @@ $(document).ready(function() {
 
     populateAllPets();
 
+    populateNewPetForm();
+
 
     //when form submitted
     $('#form').on('submit', function(e) {
@@ -89,20 +91,12 @@ function feedPet(buttonPressed, food) {
 
 function addNewPet(pet) {
 
-    switch (pet.petTypeId) {
-        case 1:
-            imageSrc = "images/guineapig.png";
-            break;
-        case 2:
-            imageSrc = "images/cat.png";
-            break;
-        case 3:
-            imageSrc = "images/pig.png";
-            break;
-        case 4:
-            imageSrc = "images/dog.png";
-            break;
-    }
+    imageSrc = pet.petType.name.toLowerCase();
+    imageSrc = imageSrc.replace(/[^A-Z0-9]+/ig, '');
+    imageSrc = "images/" + imageSrc + ".png"
+
+    console.log(imageSrc);
+
     $("#contents").prepend(
         '<div class="showPet">' +
 
@@ -149,6 +143,21 @@ function populateAllPets(){
     });
 
 }
+
+function populateNewPetForm(){
+    //load in all the petTypes from database and display
+    $.get("http://localhost:8080/pets/types", function(data) {
+        $.each(data, function(i, petType) {
+            $("#petTypeId_container").append(
+                "<option value='" + petType.id + "'>" + petType.name + "</option>"
+
+            );
+        });
+    });
+
+}
+
+
 function removeAllPets(){
 $("#contents").empty();
 

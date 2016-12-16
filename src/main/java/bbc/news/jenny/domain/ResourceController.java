@@ -1,23 +1,22 @@
 package bbc.news.jenny.domain;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import bbc.news.jenny.repository.PetRepository;
+import bbc.news.jenny.repository.PetTypeRepository;
 import bbc.news.jenny.utils.PetUtils;
 import bbc.news.jenny.workflow.PetFeederBeef;
 import bbc.news.jenny.workflow.PetFeederHam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class ResourceController {
 
     @Autowired
     private PetRepository petRepository;
-//    @Autowired
-//    private PetFeederBeef petFeederBeef;
-//    @Autowired
-//    private PetFeederHam petFeederHam;
+    @Autowired
+    private PetTypeRepository petTypeRepository;
 
     @RequestMapping(value = "/pets", method = RequestMethod.GET)
     public List<Pet> returnListOfPets() {
@@ -33,34 +32,26 @@ public class ResourceController {
     @RequestMapping(value = "pets/new/{ownerId}/{name}/{age}/{health}/{petTypeId}", method = RequestMethod.GET)
     public Pet makeNewPet(@PathVariable Integer ownerId, @PathVariable String name, @PathVariable Integer age,
                           @PathVariable Integer health, @PathVariable Integer petTypeId) {
-
         List<Pet> listOfPets = petRepository.load();
+        List<PetType> listOfPetTypes = petTypeRepository.load();
 
-        AbstractPet petToAdd = null;
 
-        switch (petTypeId) {
-            case 1:
-                petToAdd = new GuineaPig(ownerId, name, age, health, petTypeId);
+        PetType petType = null;
+
+        for (PetType petTypeSearch : listOfPetTypes) {
+            if (petTypeSearch.getId() == petTypeId) {
+                petType = petTypeSearch;
                 break;
-            case 2:
-                petToAdd = new Cat(ownerId, name, age, health, petTypeId, 5);
-                break;
-            case 3:
-                petToAdd = new Pig(ownerId, name, age, health, petTypeId);
-                break;
-            case 4:
-                petToAdd = new Dog(ownerId, name, age, health, petTypeId, true);
-                break;
+            }
         }
-        if (petToAdd == null) return null;
+        Pet petToAdd = new Pet(ownerId, name, age, health, petType);
+
+        int newPetKey = petRepository.save(petToAdd);
+        petToAdd.setPetId(newPetKey);
 
         listOfPets.add(petToAdd);
 
-        petRepository.save(listOfPets);
-
-        //must be loaded from database in order to display newly created petId
-        listOfPets = petRepository.load();
-        return PetUtils.findPetFromListByName(listOfPets, petToAdd.getName());
+        return petToAdd;
     }
 
     @RequestMapping(value = "pets/{name}/feed/{amount}/{foodType}", method = RequestMethod.GET)
@@ -79,7 +70,8 @@ public class ResourceController {
             default:
                 output = null;
         }
-        petRepository.save(listOfPets);
+        //todo: fix to use id, using a map
+        petRepository.save(PetUtils.findPetFromListByName(listOfPets, name));
         return output;
     }
 
@@ -104,6 +96,12 @@ public class ResourceController {
         return PetUtils.findPetFromListByPartialName(listOfPets, queryString);
 
     }
+
+    @RequestMapping(value = "pets/types", method = RequestMethod.GET)
+    public List<PetType> getPetTypes() {
+        return petTypeRepository.load();
+    }
+
 
     //***POST
     @RequestMapping(value = "/test", method = RequestMethod.POST)

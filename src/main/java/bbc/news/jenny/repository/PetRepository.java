@@ -19,14 +19,13 @@ public class PetRepository implements Repository<Pet> {
         //Load in pets from database as a list
         List<Pet> listOfPets;
         listOfPets = petExtractor.extract();
-        System.out.println("Loading in from database");
         return listOfPets;
 
     }
 
-    public void save(List<Pet> listOfPets) {
+    public int save(Pet pet) {
         System.out.println("Saving to database");
-        petSaver.save(listOfPets);
+        return petSaver.save(pet);
 
     }
 
@@ -36,7 +35,7 @@ public class PetRepository implements Repository<Pet> {
 
     }
 
-    public Integer select(String queryString){
+    public Integer select(String queryString) {
         Integer petId = 56;
 
         return petId;

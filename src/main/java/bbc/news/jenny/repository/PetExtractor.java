@@ -2,20 +2,19 @@ package bbc.news.jenny.repository;
 
 import bbc.news.jenny.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class PetExtractor {
 
-
+    @Autowired
+    private PetTypeRepository petTypeRepository;
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -39,18 +38,15 @@ public class PetExtractor {
             Integer petHealth = resultSet.getInt("pet_health");
             Integer petTypeId = resultSet.getInt("pet_type_id");
 
+            List<PetType> listOfPetTypes = petTypeRepository.load();
+            PetType petType = null;
 
-            switch (petTypeId) {
-                case 1://guineapig
-                    return new GuineaPig(petId, ownerId, petName, petAge, petHealth, petTypeId);
-                case 2://cat
-                    return new Cat(petId, ownerId, petName, petAge, petHealth, petTypeId, 100);
-                case 3://pig
-                    return new Pig(petId, ownerId, petName, petAge, petHealth, petTypeId);
-                case 4://dog
-                    return new Dog(petId, ownerId, petName, petAge, petHealth, petTypeId, true);
+            for (PetType petTypeSearch : listOfPetTypes) {
+                if (petTypeSearch.getId() == petTypeId) {
+                    petType = petTypeSearch;
+                }
             }
-            return null;
+            return new Pet(petId, ownerId, petName, petAge, petHealth, petType);
         }
     }
 
