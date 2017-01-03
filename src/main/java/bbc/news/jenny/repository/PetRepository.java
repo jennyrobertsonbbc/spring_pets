@@ -3,7 +3,7 @@ package bbc.news.jenny.repository;
 import bbc.news.jenny.domain.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
+import java.util.Map;
 
 @org.springframework.stereotype.Repository
 public class PetRepository implements Repository<Pet> {
@@ -15,11 +15,9 @@ public class PetRepository implements Repository<Pet> {
     @Autowired
     private PetDeleter petDeleter;
 
-    public List<Pet> load() {
+    public Map<Integer, Pet> load() {
         //Load in pets from database as a list
-        List<Pet> listOfPets;
-        listOfPets = petExtractor.extract();
-        return listOfPets;
+        return petExtractor.extract();
 
     }
 

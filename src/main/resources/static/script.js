@@ -34,11 +34,11 @@ $(document).ready(function() {
 
     //when delete button clicked
     $("#contents").on("click", "button.delete_button", function() {
-        var petName = $(this).parent().parent().find('.petName').html();
-        console.log(petName);
+        var petId = $(this).parent().parent().find('.petId').html();
+        console.log(petId);
         $(this).parent().parent().remove();
 
-        $.get("http://localhost:8080/pets/" + petName + "/delete/");
+        $.get("http://localhost:8080/pets/" + petId + "/delete/");
 
     });
     //when feed button clicked
@@ -78,10 +78,10 @@ $(document).ready(function() {
 
 function feedPet(buttonPressed, food) {
     var newHealth;
-    var petName = buttonPressed.parent().parent().find('.petName').html();
+    var petId = buttonPressed.parent().parent().find('.petId').html();
     var petHealthSlider = buttonPressed.parent().parent().find(".petHealthSliderInner");
     //do the thing
-    $.get("http://localhost:8080/pets/" + petName + "/feed/1/" + food, function(data) {
+    $.get("http://localhost:8080/pets/" + petId + "/feed/1/" + food, function(data) {
         newHealth = data;
         console.log("newHealth: " + newHealth);
         petHealthSlider.css("width", newHealth + "%");
@@ -111,7 +111,7 @@ function addNewPet(pet) {
 
         '<div class="petColumnRight">' +
         '<span class="petOwner">Owned by ' + pet.ownerId + '</span><br>' +
-        '<span class="petId">Id: ' + pet.petId + '</span>' +
+        'Id: <span class="petId">' + pet.petId + '</span>' +
 
         '</div>' +
 
