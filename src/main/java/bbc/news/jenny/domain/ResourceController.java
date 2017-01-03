@@ -1,5 +1,6 @@
 package bbc.news.jenny.domain;
 
+import bbc.news.jenny.repository.OwnerRepository;
 import bbc.news.jenny.repository.PetRepository;
 import bbc.news.jenny.repository.PetTypeRepository;
 import bbc.news.jenny.utils.PetUtils;
@@ -18,10 +19,22 @@ public class ResourceController {
     private PetRepository petRepository;
     @Autowired
     private PetTypeRepository petTypeRepository;
+    @Autowired
+    private OwnerRepository ownerRepository;
 
     @RequestMapping(value = "/pets", method = RequestMethod.GET)
     public Map<Integer, Pet> returnListOfPets() {
         return petRepository.load();
+    }
+
+    @RequestMapping(value = "/owners", method = RequestMethod.GET)
+    public Map<Integer, Owner> returnListOfOwners() {
+        return ownerRepository.load();
+    }
+
+    @RequestMapping(value = "pets/types", method = RequestMethod.GET)
+    public Map<Integer, PetType> getPetTypes() {
+        return petTypeRepository.load();
     }
 
     @RequestMapping(value = "pets/{name}", method = RequestMethod.GET)
@@ -78,17 +91,20 @@ public class ResourceController {
 
     }
 
+//    @RequestMapping(value = "pets/{petId}/owner", method = RequestMethod.GET)
+//    public void getPetsOwner(@PathVariable Integer petId) {
+//        Map<Integer, Pet> mapOfPets = petRepository.load();
+//
+//        petRepository.delete(mapOfPets.get(petId));
+//
+//    }
+
     @RequestMapping(value = "pets/search/{queryString}", method = RequestMethod.GET)
     public List<Pet> searchForPet(@PathVariable String queryString) {
         Map<Integer, Pet>  mapOfPets = petRepository.load();
 
         return PetUtils.findPetByPartOfName(mapOfPets, queryString);
 
-    }
-
-    @RequestMapping(value = "pets/types", method = RequestMethod.GET)
-    public Map<Integer, PetType> getPetTypes() {
-        return petTypeRepository.load();
     }
 
 

@@ -6,19 +6,19 @@ import java.util.List;
  * Created by roberj78 on 03/10/2016.
  */
 public class Owner {
-    private Integer ownerID;
+    private Integer ownerId;
     private String name;
     private Integer age;
     private List<Pet> petsOwned;
 
     public Owner(Integer ownerID, String name, Integer age) {
-        this.ownerID = ownerID;
+        this.ownerId = ownerID;
         this.name = name;
         this.age = age;
     }
 
-    public Integer getOwnerID() {
-        return ownerID;
+    public Integer getOwnerId() {
+        return ownerId;
     }
 
     public String getName() {
@@ -48,7 +48,7 @@ public class Owner {
     @Override
     public String toString() {
         return "Owner{" +
-                "ownerID=" + ownerID +
+                "ownerID=" + ownerId +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", petsOwned=" + petsOwned +

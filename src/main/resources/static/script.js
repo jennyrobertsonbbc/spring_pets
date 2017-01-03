@@ -95,6 +95,8 @@ function addNewPet(pet) {
     imageSrc = imageSrc.replace(/[^A-Z0-9]+/ig, '');
     imageSrc = "images/" + imageSrc + ".png"
 
+
+
     console.log(imageSrc);
 
     $("#contents").prepend(
@@ -150,6 +152,15 @@ function populateNewPetForm(){
         $.each(data, function(i, petType) {
             $("#petTypeId_container").append(
                 "<option value='" + petType.id + "'>" + petType.name + "</option>"
+
+            );
+        });
+    });
+
+    $.get("http://localhost:8080/owners", function(data) {
+        $.each(data, function(i, owner) {
+            $("#owner_option_container").append(
+                "<option value='" + owner.ownerId + "'>" + owner.name + "</option>"
 
             );
         });
