@@ -50,9 +50,10 @@ public class ResourceController {
 
         Map<Integer, Pet> mapOfPets = petRepository.load();
         Map<Integer, PetType> mapOfPetTypes = petTypeRepository.load();
+        Map<Integer, Owner> mapOfOwners = ownerRepository.load();
 
 
-        Pet petToAdd = new Pet(ownerId, name, age, health, mapOfPetTypes.get(petTypeId));
+        Pet petToAdd = new Pet( mapOfOwners.get(ownerId), name, age, health, mapOfPetTypes.get(petTypeId));
 
         int newPetKey = petRepository.save(petToAdd);
         petToAdd.setPetId(newPetKey);

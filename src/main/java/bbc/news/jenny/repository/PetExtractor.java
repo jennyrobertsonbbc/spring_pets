@@ -1,5 +1,6 @@
 package bbc.news.jenny.repository;
 
+import bbc.news.jenny.domain.Owner;
 import bbc.news.jenny.domain.Pet;
 import bbc.news.jenny.domain.PetType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,17 @@ public class PetExtractor {
     @Autowired
     private PetTypeRepository petTypeRepository;
     @Autowired
+    private OwnerRepository ownerRepository;
+    @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 
     public Map extract() {
         String sql = "SELECT * FROM pets ORDER BY pet_id ASC;";
 
-        HashMap<Integer, Pet> mapOfPets = new HashMap<Integer, Pet>();
-
+        Map<Integer, Pet> mapOfPets = new HashMap<Integer, Pet>();
         Map<Integer, PetType> mapOfPetTypes = petTypeRepository.load();
+        Map<Integer, Owner> mapOfOwners = ownerRepository.load();
 
 
         return namedParameterJdbcTemplate.query(sql, new ResultSetExtractor<Map>() {
@@ -37,7 +40,7 @@ public class PetExtractor {
                 while (resultSet.next()) {
                     mapOfPets.put(resultSet.getInt("pet_id"), new Pet(
                             resultSet.getInt("pet_id"),
-                            resultSet.getInt("owner_id"),
+                            mapOfOwners.get(resultSet.getInt("owner_id")),
                             resultSet.getString("pet_name"),
                             resultSet.getInt("pet_age"),
                             resultSet.getInt("pet_health"),

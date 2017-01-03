@@ -2,23 +2,24 @@ package bbc.news.jenny.domain;
 
 public class Pet{
     private Integer petId;
-    private Integer ownerId;
+    private Owner owner;
     private String name;
     private Integer age;
     private Integer health;
     private PetType petType;
 
-    public Pet(Integer petId, Integer ownerId, String name, Integer age, Integer health, PetType petType) {
+
+    public Pet(Integer petId, Owner owner, String name, Integer age, Integer health, PetType petType) {
         this.petId = petId;
-        this.ownerId = ownerId;
+        this.owner = owner;
         this.name = name;
         this.age = age;
         this.health = health;
         this.petType = petType;
     }
 
-    public Pet(Integer ownerId, String name, Integer age, Integer health, PetType petType) {
-        this.ownerId = ownerId;
+    public Pet(Owner owner, String name, Integer age, Integer health, PetType petType) {
+        this.owner = owner;
         this.name = name;
         this.age = age;
         this.health = health;
@@ -41,12 +42,12 @@ public class Pet{
         this.petId = petId;
     }
 
-    public Integer getOwnerId() {
-        return ownerId;
+    public Owner getOwnerId() {
+        return owner;
     }
 
-    public void setOwnerId(Integer ownerId) {
-        this.ownerId = ownerId;
+    public void setOwnerId(Owner owner) {
+        this.owner = owner;
     }
 
     public String getName() {
@@ -81,7 +82,7 @@ public class Pet{
     public String toString() {
         return "Pet{" +
                 "petId=" + petId +
-                ", ownerId=" + ownerId +
+                ", owner=" + owner +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", health=" + health +
@@ -97,7 +98,7 @@ public class Pet{
         Pet pet = (Pet) o;
 
         if (petId != null ? !petId.equals(pet.petId) : pet.petId != null) return false;
-        if (ownerId != null ? !ownerId.equals(pet.ownerId) : pet.ownerId != null) return false;
+        if (owner != null ? !owner.equals(pet.owner) : pet.owner != null) return false;
         if (name != null ? !name.equals(pet.name) : pet.name != null) return false;
         if (age != null ? !age.equals(pet.age) : pet.age != null) return false;
         if (health != null ? !health.equals(pet.health) : pet.health != null) return false;

@@ -112,7 +112,7 @@ function addNewPet(pet) {
         '</div>' +
 
         '<div class="petColumnRight">' +
-        '<span class="petOwner">Owned by ' + pet.ownerId + '</span><br>' +
+        '<span class="petOwner">Owned by ' + pet.ownerId.name + '</span><br>' +
         'Id: <span class="petId">' + pet.petId + '</span>' +
 
         '</div>' +
