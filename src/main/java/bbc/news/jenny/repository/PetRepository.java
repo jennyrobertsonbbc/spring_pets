@@ -3,7 +3,6 @@ package bbc.news.jenny.repository;
 import bbc.news.jenny.domain.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @org.springframework.stereotype.Repository
@@ -18,10 +17,7 @@ public class PetRepository implements Repository<Pet> {
 
     public Map<Integer, Pet> load() {
         //Load in pets from database as a list
-        //List<Pet> listOfPets;
-        Map<Integer, Pet> mapOfPets = new HashMap<Integer, Pet>();
-        mapOfPets = petExtractor.extract();
-        return mapOfPets;
+        return petExtractor.extract();
 
     }
 

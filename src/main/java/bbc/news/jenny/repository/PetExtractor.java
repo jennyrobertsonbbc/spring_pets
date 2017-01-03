@@ -30,21 +30,22 @@ public class PetExtractor {
         PetType testPetType = new PetType("testType", 1000);
         Pet testPet = new Pet(3, "bobob", 5, 50, testPetType);
 
+        Map<Integer, PetType> mapOfPetTypes = petTypeRepository.load();
+
 
         return namedParameterJdbcTemplate.query(sql, new ResultSetExtractor<Map>() {
             @Override
             public Map extractData(ResultSet resultSet) throws SQLException, DataAccessException {
 
-                HashMap<Integer, Pet> mapOfPets = new HashMap<Integer, Pet>();
-
-
                 while (resultSet.next()) {
                     mapOfPets.put(resultSet.getInt("pet_id"), new Pet(
                             resultSet.getInt("pet_id"),
+                            resultSet.getInt("owner_id"),
                             resultSet.getString("pet_name"),
                             resultSet.getInt("pet_age"),
                             resultSet.getInt("pet_health"),
-                            testPetType));
+                            mapOfPetTypes.get(resultSet.getInt("pet_type_id")))
+                    );
                 }
                 return mapOfPets;
             }
