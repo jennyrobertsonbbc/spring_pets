@@ -28,75 +28,27 @@ public class PetExtractor {
         HashMap<Integer, Pet> mapOfPets = new HashMap<Integer, Pet>();
 
         PetType testPetType = new PetType("testType", 1000);
-        Pet testPet = new Pet(3,"bobob",5,50,testPetType);
+        Pet testPet = new Pet(3, "bobob", 5, 50, testPetType);
 
 
-        return namedParameterJdbcTemplate.query(sql, new ResultSetExtractor<Map>(){
+        return namedParameterJdbcTemplate.query(sql, new ResultSetExtractor<Map>() {
             @Override
-            public Map extractData(ResultSet resultSet) throws SQLException,DataAccessException {
+            public Map extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+
+                HashMap<Integer, Pet> mapOfPets = new HashMap<Integer, Pet>();
 
 
-
-                HashMap<Integer,Pet> mapRet= new HashMap<Integer,Pet>();
-
-
-                while(resultSet.next()){
-                    mapRet.put(resultSet.getInt("pet_id"),new Pet(3,resultSet.getString("pet_name"),5,50,testPetType));
+                while (resultSet.next()) {
+                    mapOfPets.put(resultSet.getInt("pet_id"), new Pet(
+                            resultSet.getInt("pet_id"),
+                            resultSet.getString("pet_name"),
+                            resultSet.getInt("pet_age"),
+                            resultSet.getInt("pet_health"),
+                            testPetType));
                 }
-                return mapRet;
+                return mapOfPets;
             }
         });
     }
-
-    //    public class PetRowMapper implements RowMapper<Pet> {
-//
-//
-//        @Override
-//        public Pet mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-//
-//            Integer petId = resultSet.getInt("pet_id");
-//            Integer ownerId = resultSet.getInt("owner_id");
-//            String petName = resultSet.getString("pet_name");
-//            Integer petAge = resultSet.getInt("pet_age");
-//            Integer petHealth = resultSet.getInt("pet_health");
-//            Integer petTypeId = resultSet.getInt("pet_type_id");
-//
-//            List<PetType> listOfPetTypes = petTypeRepository.load();
-//            PetType petType = null;
-//
-//            for (PetType petTypeSearch : listOfPetTypes) {
-//                if (petTypeSearch.getId() == petTypeId) {
-//                    petType = petTypeSearch;
-//                }
-//            }
-//            return new Pet(petId, ownerId, petName, petAge, petHealth, petType);
-//        }
-//    }
-
-
-//    public class PetRowMapper implements RowMapper<Pet> {
-//
-//
-//        @Override
-//        public Pet mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-//
-//            Integer petId = resultSet.getInt("pet_id");
-//            Integer ownerId = resultSet.getInt("owner_id");
-//            String petName = resultSet.getString("pet_name");
-//            Integer petAge = resultSet.getInt("pet_age");
-//            Integer petHealth = resultSet.getInt("pet_health");
-//            Integer petTypeId = resultSet.getInt("pet_type_id");
-//
-//            List<PetType> listOfPetTypes = petTypeRepository.load();
-//            PetType petType = null;
-//
-//            for (PetType petTypeSearch : listOfPetTypes) {
-//                if (petTypeSearch.getId() == petTypeId) {
-//                    petType = petTypeSearch;
-//                }
-//            }
-//            return new Pet(petId, ownerId, petName, petAge, petHealth, petType);
-//        }
-//    }
 
 }
