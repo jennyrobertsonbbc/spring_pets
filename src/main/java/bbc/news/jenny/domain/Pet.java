@@ -42,11 +42,11 @@ public class Pet{
         this.petId = petId;
     }
 
-    public Owner getOwnerId() {
+    public Owner getOwner() {
         return owner;
     }
 
-    public void setOwnerId(Owner owner) {
+    public void setOwner(Owner owner) {
         this.owner = owner;
     }
 
@@ -78,17 +78,6 @@ public class Pet{
         this.petType = petType;
     }
 
-    @Override
-    public String toString() {
-        return "Pet{" +
-                "petId=" + petId +
-                ", owner=" + owner +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", health=" + health +
-                ", petType=" + petType +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -108,8 +97,12 @@ public class Pet{
 
     @Override
     public int hashCode() {
-        return 0;
+        int result = petId != null ? petId.hashCode() : 0;
+        result = 31 * result + (owner != null ? owner.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (age != null ? age.hashCode() : 0);
+        result = 31 * result + (health != null ? health.hashCode() : 0);
+        result = 31 * result + (petType != null ? petType.hashCode() : 0);
+        return result;
     }
-
-
 }

@@ -27,7 +27,7 @@ public class PetSaver {
                     "(owner_id, pet_name ,pet_age,pet_health ,pet_type_id) " +
                     "VALUES(:owner_id,:pet_name,:pet_age,:pet_health,:pet_type_id);";
 
-            parameters.addValue("owner_id", pet.getOwnerId());
+            parameters.addValue("owner_id", pet.getOwner().getOwnerId());
             parameters.addValue("pet_name", pet.getName());
             parameters.addValue("pet_age", pet.getAge());
             parameters.addValue("pet_health", pet.getHealth());
@@ -51,7 +51,7 @@ public class PetSaver {
                     " WHERE pet_id = :pet_id;";
 
 
-            parameters.addValue("owner_id", pet.getOwnerId());
+            parameters.addValue("owner_id", pet.getOwner().getOwnerId());
             parameters.addValue("pet_name", pet.getName());
             parameters.addValue("pet_age", pet.getAge());
             parameters.addValue("pet_health", pet.getHealth());
