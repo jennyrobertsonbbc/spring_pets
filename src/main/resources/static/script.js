@@ -94,12 +94,10 @@ function feedPet(buttonPressed, food) {
 
 function viewOwnersPets(buttonPressed) {
     var ownerId = buttonPressed.parent().parent().find('.ownerId').html();
-    //do the thing
-//    $.get("http://localhost:8080/pets/" + petId + "/feed/1/" + food, function(data) {
-//        newHealth = data;
-//        console.log("newHealth: " + newHealth);
-//        petHealthSlider.css("width", newHealth + "%");
-//    });
+    var classWithId = ".ownerId" + ownerId;
+
+    $('.showPet').css({ 'background' : "#dee8e7"});
+    $('.ownerId' + ownerId).css({ 'background' : "#88ff4d"});
 
 }
 
@@ -110,7 +108,7 @@ function addNewPet(pet) {
     imageSrc = "images/" + imageSrc + ".png"
 
     $("#petsDiv").prepend(
-        '<div class="showPet">' +
+        '<div class="showPet ownerId'+ pet.owner.ownerId +'">' +
 
         '<div class="petColumnLeft">' +
         '<img class="petImage" src="' + imageSrc + '"/>' +
