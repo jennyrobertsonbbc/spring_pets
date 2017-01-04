@@ -150,8 +150,15 @@ function populateNewPetForm(){
     //load in all the petTypes from database and display
     $.get("http://localhost:8080/pets/types", function(data) {
         $.each(data, function(i, petType) {
+
+        //to camel case
+        var petTypeString = petType.name;
+        var re = /(\b[a-z](?!\s))/g;
+        petTypeString = petTypeString.replace(re, function(x){return x.toUpperCase();});
+
+
             $("#petTypeId_container").append(
-                "<option value='" + petType.id + "'>" + petType.name + "</option>"
+                "<option value='" + petType.id + "'>" + petTypeString + "</option>"
 
             );
         });
