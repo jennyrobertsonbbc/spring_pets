@@ -24,8 +24,8 @@
                     </tr>
                     <tr>
                         <td>Pet type:</td>
-                        <td >
-                            <select name="petTypeId" id = "petTypeId_container">
+                        <td>
+                            <select name="petTypeId" id="petTypeId_container">
                                 <!--<option value="1">Guinea Pig</option>-->
                                 <!--<option value="2">Cat</option>-->
                                 <!--<option value="3">Pig</option>-->
@@ -41,7 +41,7 @@
                     </tr>
                     <tr>
                         <td>Pet owner:</td>
-                        <td><select name="petOwnerId" id = "owner_option_container">
+                        <td><select name="petOwnerId" id="owner_option_container">
                             <!--<option value="1">Jenny</option>-->
                             <!--<option value="2">Gareth</option>-->
                         </select>
@@ -63,41 +63,67 @@
 
     <div id="contents">
 
-        <div class="showPet">
+        <div id="petsDiv">
 
-            <div class="petColumnLeft">
+            <div class="showPet">
 
-                <img class="petImage" src="images/dog.png"/>
-            </div>
+                <div class="petColumnLeft">
 
-            <div class="petColumnMiddle">
-                <h2 class="petName">Test</h2>
-                <span class="petAge">5 years old</span>
-            </div>
+                    <img class="petImage" src="images/dog.png"/>
+                </div>
 
-            <div class="petColumnRight">
-                <span class="petOwner">Owned by Jenny</span><br>
-                <!-- <span class="petHealth">health: 45 </span><br> -->
-                <span class="petId">Id: -1 </span>
+                <div class="petColumnMiddle">
+                    <h2 class="petName">Test</h2>
+                    <span class="petAge">5 years old</span>
+                </div>
 
-            </div>
+                <div class="petColumnRight">
+                    <span class="petOwner">Owned by Jenny</span><br>
+                    <!-- <span class="petHealth">health: 45 </span><br> -->
+                    <span class="petId">Id: -1 </span>
 
-            <div class="petRowBottom">
-                <button class="feed_button" id="ham_button">Ham</button>
-                <button class="feed_button" id="beef_button">Beef</button>
-                <button class="delete_button">x</button>
+                </div>
+
+                <div class="petRowBottom">
+                    <button class="feed_button" id="ham_button">Ham</button>
+                    <button class="feed_button" id="beef_button">Beef</button>
+                    <button class="delete_button">x</button>
 
 
-                <div class="petHealthSlider">
-                    <div class="petHealthSliderHearts"></div>
+                    <div class="petHealthSlider">
+                        <div class="petHealthSliderHearts"></div>
 
-                    <div class="petHealthSliderInner" style="width: 55%"></div>
+                        <div class="petHealthSliderInner" style="width: 55%"></div>
 
+
+                    </div>
 
                 </div>
 
             </div>
+        </div>
 
+        <div id="ownersDiv">
+            <div class="showPet">
+
+                <div class="petColumnLeft">
+                    <img class="petImage" src="images/silhouette-female.jpg"/>
+                </div>
+
+                <div class="petColumnMiddle">
+                    <h2 class="petName">Owner</h2>
+                </div>
+
+                <div class="petColumnRight">
+                    <span class="petId">Id: -1 </span>
+                </div>
+
+                <div class="petRowBottom">
+                    <button class="feed_button" id="ham_button">View Pets</button>
+                    <button class="delete_button">x</button>
+                </div>
+
+            </div>
         </div>
 
 

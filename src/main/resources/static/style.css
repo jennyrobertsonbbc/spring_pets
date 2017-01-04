@@ -44,8 +44,8 @@ margin-top: 30px;
 	border: 1px solid black;
 }
 .petImage{
-	width: 100px;
-	height: 50px;
+	max-width: 100px;
+	max-height: 50px;
 	padding: 5px;
 	float: left;
 }
@@ -136,3 +136,16 @@ form{
     font-size: 30px;
 }
 
+#petsDiv{
+    width: 66%;
+    float: left;
+    height: 100%;
+    display: block;
+}
+
+#ownersDiv{
+    width: 33%;
+    float: right;
+    height: 100%;
+    display: block;
+}

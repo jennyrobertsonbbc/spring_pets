@@ -3,7 +3,7 @@ $(document).ready(function() {
     console.log("hello {0}".format("test"));
 
     populateAllPets();
-
+    populateAllOwners();
     populateNewPetForm();
 
 
@@ -26,8 +26,6 @@ $(document).ready(function() {
             valuesFromForm.petHealth + "/" +
             valuesFromForm.petTypeId,
             function(data) {
-                //with the json returned, add a new pet
-                console.log(data);
                 addNewPet(data);
             });
     });
@@ -50,6 +48,11 @@ $(document).ready(function() {
         var buttonPressed = $(this);
         feedPet(buttonPressed, "beef");
     });
+    $("#contents").on("click", "button#view_pets_button", function() {
+        var buttonPressed = $(this);
+        viewOwnersPets(buttonPressed);
+    });
+
 
 
     $('#search').on('input', function(e) {
@@ -89,17 +92,24 @@ function feedPet(buttonPressed, food) {
 
 }
 
+function viewOwnersPets(buttonPressed) {
+    var ownerId = buttonPressed.parent().parent().find('.ownerId').html();
+    //do the thing
+//    $.get("http://localhost:8080/pets/" + petId + "/feed/1/" + food, function(data) {
+//        newHealth = data;
+//        console.log("newHealth: " + newHealth);
+//        petHealthSlider.css("width", newHealth + "%");
+//    });
+
+}
+
 function addNewPet(pet) {
 
     imageSrc = pet.petType.name.toLowerCase();
     imageSrc = imageSrc.replace(/[^A-Z0-9]+/ig, '');
     imageSrc = "images/" + imageSrc + ".png"
 
-
-
-    console.log(imageSrc);
-
-    $("#contents").prepend(
+    $("#petsDiv").prepend(
         '<div class="showPet">' +
 
         '<div class="petColumnLeft">' +
@@ -132,8 +142,36 @@ function addNewPet(pet) {
         ' </div>' +
 
         '</div><!-- show pet -->');
+}
 
+function addNewOwner(owner) {
 
+//    imageSrc = pet.petType.name.toLowerCase();
+//    imageSrc = imageSrc.replace(/[^A-Z0-9]+/ig, '');
+//    imageSrc = "images/" + imageSrc + ".png"
+
+    $("#ownersDiv").append(
+            '<div class="showPet">'+
+
+                '<div class="petColumnLeft">'+
+                    '<img class="petImage" src="images/silhouette-female.jpg"/>'+
+                '</div>'+
+
+                '<div class="petColumnMiddle">'+
+                    '<h2 class="petName">'+ owner.name  +'</h2>'+
+                '</div>'+
+
+               ' <div class="petColumnRight">'+
+                   ' Id: <span class="ownerId">'+ owner.ownerId +' </span>'+
+                '</div>'+
+
+                '<div class="petRowBottom">'+
+                  '  <button class="feed_button" id="view_pets_button">View Pets</button>'+
+                 '   <button class="delete_button">x</button>'+
+                '</div>'+
+        '</div>'
+
+        );
 }
 
 function populateAllPets(){
@@ -143,8 +181,17 @@ function populateAllPets(){
             addNewPet(pet);
         });
     });
-
 }
+
+function populateAllOwners(){
+    //load in all the pets from database and display
+    $.get("http://localhost:8080/owners", function(data) {
+        $.each(data, function(i, owner) {
+            addNewOwner(owner);
+        });
+    });
+}
+
 
 function populateNewPetForm(){
     //load in all the petTypes from database and display
@@ -177,7 +224,7 @@ function populateNewPetForm(){
 
 
 function removeAllPets(){
-$("#contents").empty();
+$("#petsDiv").empty();
 
 }
 
